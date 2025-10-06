@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
 import './TargetCursor.css';
+import { useLocation } from 'react-router-dom'; 
 
 const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hideDefaultCursor = true }) => {
   const cursorRef = useRef(null);
