@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
+
 import './TargetCursor.css';
 
 const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hideDefaultCursor = true }) => {
@@ -323,8 +324,6 @@ const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hid
         .to(cursorRef.current, { rotation: '+=360', duration: spinDuration, ease: 'none' });
     }
   }, [spinDuration]);
-
-  
 
   return (
     <div ref={cursorRef} className="target-cursor-wrapper">
