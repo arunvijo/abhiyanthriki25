@@ -1,7 +1,7 @@
 
 import techCard from '../assets/figma/Tech Card.png';
 import nonTechCard from '../assets/figma/Non Tech.png';
-import autoCard from '../assets/figma/Auto.png';
+import preCard from '../assets/figma/Pre Events.png';
 import { useNavigate } from 'react-router-dom';
 
 const COLORS = {
@@ -51,12 +51,12 @@ export default function EventSection() {
             <img src={nonTechCard} alt="Non Tech card" className="w-full h-auto object-contain select-none" draggable={false} />
           </div>
 
-          {/* Auto card */}
+          {/* Pre Events card */}
           <div
             className="cursor-target relative w-[80vw] md:w-[28%] max-w-[460px] rounded-[18px] overflow-hidden transform-gpu transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_22px_70px_rgba(0,0,0,0.45)] hover:translate-y-[-6px] hover:scale-[1.02]"
             onClick={handleCardClick}
           >
-            <img src={autoCard} alt="Auto card" className="w-full h-auto object-contain select-none" draggable={false} />
+            <img src={preCard} alt="Auto card" className="w-full h-auto object-contain select-none" draggable={false} />
           </div>
         </div>
       </div>
