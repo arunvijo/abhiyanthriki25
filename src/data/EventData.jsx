@@ -93,3 +93,4 @@ export const allEvents = [
         registrationUrl: "https://konfhub.com/" // Demo URL
     },
 ];
+export default allEvents;
