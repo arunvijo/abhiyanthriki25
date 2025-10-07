@@ -15,7 +15,7 @@ const Layout = () => {
       </main>
 
       {/* ✅ Navbar is always visible */}
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* ✅ Footer is hidden only on event details page */}
       {!isEventDetailPage && <FooterSection />}
