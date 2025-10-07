@@ -140,16 +140,17 @@ const EventCard = ({ event, onViewDetailsClick }) => (
 const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
   <div className="flex justify-center -mt-5 md:-mt-2">
     <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
-      <div className={`absolute top-1/2 -translate-y-1/2 left-1.5 w-[calc(50%-6px)] h-[calc(100%-12px)] bg-red-600 rounded-full transition-transform duration-300 ease-out ${activeFilter === 'non-technical' ? 'translate-x-full' : 'translate-x-0'}`}></div>
-      <button onClick={() => setActiveFilter("technical")} className="cursor-pointer relative flex-1 py-2 text-white text-xs md:text-sm uppercase font-['KH Interference'] tracking-wider text-center">
-        Technical Events
-      </button>
-      <button onClick={() => setActiveFilter("non-technical")} className="cursor-pointer relative flex-1 py-2 text-white text-xs md:text-sm uppercase font-['KH Interference'] tracking-wider text-center">
-        Non-Technical Events
+      <button
+        onClick={() => setActiveFilter("technical")}
+        className={`flex-1 w-full py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center rounded-full
+        }`}
+      >
+        Pre Events
       </button>
     </div>
   </div>
 );
+
 
 // --- EVENT MODAL ---
 
@@ -251,7 +252,7 @@ const EventModal = ({ event, onClose }) => {
 
 // --- MAIN PAGE ---
 
-const EventsPage = () => {
+const PreEvents = () => {
   const [activeFilter, setActiveFilter] = useState("technical");
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -294,7 +295,7 @@ const EventsPage = () => {
             <div className="flex-shrink-0 sticky top-0 bg-transparent z-20 pt-8 md:pt-0">
                 <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
             </div>
-            
+
             <div className="flex-grow overflow-y-scroll no-scrollbar pt-12 md:pt-16 pb-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
                     {filteredEvents.map(event => (
@@ -313,4 +314,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default PreEvents;

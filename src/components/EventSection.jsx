@@ -16,6 +16,9 @@ export default function EventSection() {
   const handleCardClick = () => {
     navigate('/eventdetails');
   };
+  const handleCardClick2 = () => {
+    navigate('/preevents');
+  };
   
   
   return (
@@ -35,12 +38,12 @@ export default function EventSection() {
 
         {/* Cards row */}
         <div className="cursor-none mt-[40px] md:mt-[60px] flex flex-col md:flex-row md:items-start items-center md:justify-between gap-8 md:gap-6">
-          {/* Tech card */}
+          {/* Pre Events card */}
           <div
             className="cursor-target relative w-[80vw] md:w-[28%] max-w-[460px] rounded-[18px] overflow-hidden transform-gpu transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_22px_70px_rgba(0,0,0,0.45)] hover:translate-y-[-6px] hover:scale-[1.02]"
-            onClick={handleCardClick}
+            onClick={handleCardClick2}
           >
-            <img src={techCard} alt="Tech card" className="w-full h-auto object-contain select-none" draggable={false} />
+            <img src={preCard} alt="Auto card" className="w-full h-auto object-contain select-none" draggable={false} />
           </div>
 
           {/* Non Tech card */}
@@ -51,13 +54,14 @@ export default function EventSection() {
             <img src={nonTechCard} alt="Non Tech card" className="w-full h-auto object-contain select-none" draggable={false} />
           </div>
 
-          {/* Pre Events card */}
+          {/* Tech card */}
           <div
             className="cursor-target relative w-[80vw] md:w-[28%] max-w-[460px] rounded-[18px] overflow-hidden transform-gpu transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_22px_70px_rgba(0,0,0,0.45)] hover:translate-y-[-6px] hover:scale-[1.02]"
             onClick={handleCardClick}
           >
-            <img src={preCard} alt="Auto card" className="w-full h-auto object-contain select-none" draggable={false} />
+            <img src={techCard} alt="Tech card" className="w-full h-auto object-contain select-none" draggable={false} />
           </div>
+
         </div>
       </div>
     </section>

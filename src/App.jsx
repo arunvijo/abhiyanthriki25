@@ -10,6 +10,7 @@ import TargetCursor from './components/TargetCursor.jsx';
 // Lazily load page components
 const HomePage = lazy(() => import('./components/HomePage'));
 const EventDetails = lazy(() => import('./components/EventDetails'));
+const PreEvents = lazy(() => import('./components/PreEvents'));
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="eventdetails" element={<EventDetails />} />
+          <Route path="preevents" element={<PreEvents />} />
         </Route>
       </Routes>
     </Suspense>
