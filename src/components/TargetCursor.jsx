@@ -1,7 +1,10 @@
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
+import { useLocation } from 'react-router-dom';
 
 import './TargetCursor.css';
+
+
 
 const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hideDefaultCursor = true }) => {
   const cursorRef = useRef(null);
@@ -325,6 +328,8 @@ const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hid
     }
   }, [spinDuration]);
 
+  const location = useLocation();
+  
   useEffect(() => {
   // When the route changes, force reset cursor to default state
   if (!cursorRef.current || !cornersRef.current) return;

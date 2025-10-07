@@ -1,5 +1,8 @@
 import React, { useState, useMemo } from "react";
-import allEvents from "../data/EventData"; 
+import preEvents from "../data/PreeventsData"; 
+
+//Placeholder image for prevents
+import placeholderImage from "/public/keyboardwire.png";
 // NEW: Import icons from the Feather Icons library
 import { FiCalendar, FiMapPin } from 'react-icons/fi';
 // --- SVG COMPONENTS ---
@@ -110,7 +113,7 @@ const DetailsRegisterButton = ({ href }) => (
 
 
 const ViewDetailsButton = ({ onClick }) => (
-  <button onClick={onClick} className="cursor-none cursor-target relative w-full h-[50px] group text-white font-['KH Interference'] tracking-widest uppercase text-sm hover:opacity-80 transition-opacity">
+  <button onClick={onClick} className="cursor-none cursor-target mb-6 relative w-full h-[50px] group text-white font-['KH Interference'] tracking-widest uppercase text-sm hover:opacity-80 transition-opacity">
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 379 84" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11 1H368C373.523 1 378 5.47716 378 11V37.2012C378 39.9827 376.841 42.639 374.803 44.5312L356.591 61.4326L334.06 80.6143C332.251 82.154 329.953 83 327.577 83H51.4229C49.0474 83 46.7492 82.154 44.9404 80.6143L22.4082 61.4326L4.19727 44.5312C2.15851 42.639 1 39.9827 1 37.2012V11C1 5.47715 5.47715 1 11 1Z" stroke="#F64040" strokeWidth="2" />
     </svg>
@@ -122,18 +125,30 @@ const ViewDetailsButton = ({ onClick }) => (
 
 const EventCard = ({ event, onViewDetailsClick }) => (
   <div className="relative w-11/12 mx-auto aspect-[464/636]">
-    <CardShapeSVG />
-    <div className="absolute inset-0 p-6 flex flex-col">
-      <div className="flex-grow space-y-2 mb-2">
-        <h3 className="text-xl font-['KH Interference'] text-white leading-tight">{event.title}</h3>
-        <p className="text-neutral-400 text-xs leading-snug">{event.description.substring(0, 150)}...</p>
+    {/* SVG background shape with visible border */}
+    <CardShapeSVG className="absolute inset-0 w-full h-full z-0" />
+
+    {/* Content container positioned over the SVG */}
+    <div className="absolute inset-0 flex flex-col justify-between z-10">
+      {/* Image fills top vertically, leaves space on left/right */}
+      <div className="flex-grow-[0.8] flex items-center justify-center overflow-hidden px-2">
+        <img
+          src={event.image || placeholderImage}
+          alt={event.title}
+          className="w-full h-full object-cover rounded-[inherit]"
+        />
       </div>
-      <div className="flex-shrink-0 mt-auto">
-        <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
+
+      {/* Button area (bottom part) */}
+      <div className="flex justify-center items-end pb-6">
+        <div className="w-3/4 md:w-2/3">
+          <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
+        </div>
       </div>
     </div>
   </div>
 );
+
 
 // --- FILTER NAVIGATION ---
 
@@ -200,7 +215,7 @@ const EventModal = ({ event, onClose }) => {
           </div>
           
           <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full">
-            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
+            <img src={event.imageUrl || placeholderImage} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
             <ImageClipShapeSVG />
           </div>
         </div>
@@ -253,11 +268,11 @@ const EventModal = ({ event, onClose }) => {
 // --- MAIN PAGE ---
 
 const PreEvents = () => {
-  const [activeFilter, setActiveFilter] = useState("technical");
+  const [activeFilter, setActiveFilter] = useState("preevents");
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const filteredEvents = useMemo(() => {
-    return allEvents.filter(event => event.category === activeFilter);
+    return preEvents.filter(event => event.category === activeFilter);
   }, [activeFilter]);
 
   return (
