@@ -1,10 +1,9 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+// import { Routes, Route } from 'react-router-dom'; // Keep commented as per original
 
-// Import the shared layout and the new animated background
+// Import shared components
 import Layout from './components/Layout';
-import AnimatedBackground from './components/AnimatedBackground'; // ✅ NEW
-
+import AnimatedBackground from './components/AnimatedBackground';
 import TargetCursor from './components/TargetCursor.jsx';
 
 // Lazily load page components
@@ -13,40 +12,45 @@ const EventDetails = lazy(() => import('./components/EventDetails'));
 
 function App() {
   return (
-    // The main container no longer needs background styles as they are in index.css
-    
-    <div className="relative min-h-screen w-full overflow-x-hidden">
-  <AnimatedBackground />
-  <div className="hidden md:block">
-    <TargetCursor 
-        spinDuration={2}
-        hideDefaultCursor={true}
-      />
+    // MODIFIED: Added flex & flex-col to structure the page with a footer
+    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col">
+      <AnimatedBackground />
+      <div className="hidden md:block">
+        <TargetCursor
+          spinDuration={2}
+          hideDefaultCursor={true}
+        />
       </div>
 
-  <div className="relative z-10 flex flex-col">
-    <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
-    <div style={{
-    color: '#F64040',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    fontSize: '2rem',
-    fontWeight: 'bold'
-}}>
-  Coming Soon...
-</div>
-      {/* <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="eventdetails" element={<EventDetails />} />
-        </Route>
-      </Routes> */}
-    </Suspense>
-  </div>
-</div>
+      {/* Main content area now expands to fill available space */}
+      <div className="relative z-10 flex flex-col flex-grow">
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
+          
+          {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
+          <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
+            <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
+              Coming Soon
+            </h1>
+            <p className="text-neutral-300 text-lg sm:text-xl md:text-2xl mt-4">
+              Launching Tomorrow!
+            </p>
+          </div>
 
+          {/* Original routes are kept commented out as they were in your file */}
+          {/* <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="eventdetails" element={<EventDetails />} />
+            </Route>
+          </Routes> */}
+        </Suspense>
+      </div>
+
+      {/* NEW: Added a footer for developer credits */}
+      <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
+        <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
+      </footer>
+    </div>
   );
 }
 
