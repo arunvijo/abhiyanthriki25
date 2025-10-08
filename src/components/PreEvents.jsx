@@ -8,7 +8,7 @@ import TargetCursor from '/src/components/TargetCursor.jsx';
 //Placeholder image for prevents
 import placeholderImage from "/keyboardwire.png";
 // NEW: Import icons from the Feather Icons library
-import { FiCalendar, FiMapPin } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiDollarSign, FiMapPin } from 'react-icons/fi';
 // --- SVG COMPONENTS ---
 
 const ImageClipPathSVG = () => (
@@ -190,17 +190,34 @@ const EventModal = ({ event, onClose }) => {
                 {event.date && (
                   <div className="flex items-center space-x-3">
                     {/* MODIFIED: Replaced emoji with FiCalendar icon */}
-                    <FiCalendar className="text-[#F64040] h-4 w-4 flex-shrink-0" />
+                    <FiCalendar className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
                     <span>{event.date}</span>
                   </div>
                 )}
                 {event.venue && (
                   <div className="flex items-center space-x-3">
                     {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiMapPin className="text-[#F64040] h-4 w-4 flex-shrink-0" />
+                    <FiMapPin className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
                     <span>{event.venue}</span>
                   </div>
                 )}
+                
+                {event.price && (
+                  <div className="flex items-center space-x-3">
+                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
+                    <FiDollarSign className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
+                    <span>{event.price}</span>
+                  </div>
+                )}
+                 
+                {event.timings && (
+                  <div className="flex items-center space-x-3">
+                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
+                    <FiClock className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
+                    <span>{event.timings}</span>
+                  </div>
+                )}
+
               </div>
               
               <p className="text-neutral-300 text-sm leading-relaxed max-h-[280px] overflow-y-auto custom-scrollbar pr-2">
