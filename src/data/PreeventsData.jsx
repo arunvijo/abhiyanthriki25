@@ -1,14 +1,3 @@
-// --- IMAGE IMPORTS ---
-// It's good practice to keep image imports with the data that uses them.
-import image1 from "../assets/figma/1.png";
-import image2 from "../assets/figma/2.png";
-import image3 from "../assets/figma/3.png";
-import image4 from "../assets/figma/4.png";
-import image5 from "../assets/figma/5.png";
-import image6 from "../assets/figma/6.png";
-import image7 from "../assets/figma/7.png";
-import image8 from "../assets/figma/8.png";
-
 import image from "/public/keyboardwire.png";
 // --- EVENT DATA ARRAY ---
 // Each event now has a 'registrationUrl' property.
