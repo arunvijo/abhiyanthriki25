@@ -329,8 +329,8 @@ const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hid
   }, [spinDuration]);
 
   const location = useLocation();
-  
-  useEffect(() => {
+
+useEffect(() => {
   // When the route changes, force reset cursor to default state
   if (!cursorRef.current || !cornersRef.current) return;
 
@@ -365,6 +365,7 @@ const TargetCursor = ({ targetSelector = '.cursor-target', spinDuration = 2, hid
     .timeline({ repeat: -1 })
     .to(cursorRef.current, { rotation: '+=360', duration: spinDuration, ease: 'none' });
 }, [location.pathname, constants, spinDuration]);
+
 
   return (
     <div ref={cursorRef} className="target-cursor-wrapper">

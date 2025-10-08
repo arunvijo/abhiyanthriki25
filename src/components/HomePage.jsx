@@ -12,13 +12,23 @@ import SponsorsSection from './SponsorsSection';
 const HomePage = () => {
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection />
       <AboutSection />
-      <CollegeSection />
+      <CollegeSection /> */}
       {/* <SponsorsSection /> */}
-      <EventSection />
-      <GallerySection />
-      {/* ✅ ADDED: The new SponsorsSection is now part of your homepage layout */}
+      {/* <EventSection />
+      <GallerySection /> */}
+ <div style={{
+    color: '#F64040',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    fontSize: '2rem',
+    fontWeight: 'bold'
+}}>
+  Coming Soon...
+</div>
     </>
   );
 };
