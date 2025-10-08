@@ -34,8 +34,8 @@ export const preEvents = [
         venue: "Sycamore Lab", 
         timings:"9:00AM to 6:00PM",
         price:"150 per team" ,
-        imageUrl: image,
-        registrationUrl: "https://konfhub.com/ai-robotics-expo" // Your specific event URL
+        imageUrl: "/PreEvents/REELNAISSANCE.jpg",
+        registrationUrl: "https://konfhub.com/reelnaissance" // Your specific event URL
     },
      { 
         id: 3, 

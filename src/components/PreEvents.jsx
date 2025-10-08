@@ -172,7 +172,6 @@ const EventModal = ({ event, onClose }) => {
   
   const handleModalContentClick = (e) => e.stopPropagation();
   
-  // A helper component to avoid repetition for event details
   const EventDetailItem = ({ icon: Icon, text, isDesktop = false }) => {
     if (!text) return null;
     return (
@@ -184,20 +183,18 @@ const EventModal = ({ event, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in overflow-y-auto" onClick={onClose}>
       <ImageClipPathSVG />
 
       {/* DESKTOP LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in">
+      <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in my-8">
         <div className="relative w-full aspect-[1269/715]">
           <EventDetailsBorderSVG />
           
-          {/* UPDATED: Adjusted padding and spacing for better alignment */}
           <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
             <div className="flex flex-col space-y-8">
               <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
               
-              {/* NEW: 2x2 grid for event details */}
               <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
                 <EventDetailItem icon={FiCalendar} text={event.date} isDesktop />
                 <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop />
@@ -205,7 +202,6 @@ const EventModal = ({ event, onClose }) => {
                 <EventDetailItem icon={FiClock} text={event.timings} isDesktop />
               </div>
               
-              {/* UPDATED: Increased max-height for description */}
               <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                 {event.description}
               </p>
@@ -216,20 +212,26 @@ const EventModal = ({ event, onClose }) => {
             </div>
           </div>
           
-          <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full">
-            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
+          {/* UPDATED: Added background color to the container for better letterboxing */}
+          <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full bg-black/30">
+            {/* UPDATED: Changed object-cover to object-contain to show the full poster */}
+            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-contain" style={{ clipPath: 'url(#image-clip)' }} />
             <ImageClipShapeSVG />
           </div>
         </div>
       </div>
 
       {/* MOBILE LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#F64040] rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200">
-        <img src={event.imageUrl} alt={event.title} className="w-full h-auto aspect-video object-cover rounded-lg" />
+      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#F64040] rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200 my-8">
+        {/* UPDATED: Changed aspect ratio and object-fit for the poster */}
+        <img 
+            src={event.imageUrl} 
+            alt={event.title} 
+            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
+        />
         
         <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
 
-        {/* NEW: 2x2 grid for event details on mobile */}
         <div className="grid grid-cols-2 gap-4">
           <EventDetailItem icon={FiCalendar} text={event.date} />
           <EventDetailItem icon={FiMapPin} text={event.venue} />
@@ -237,9 +239,8 @@ const EventModal = ({ event, onClose }) => {
           <EventDetailItem icon={FiClock} text={event.timings} />
         </div>
         
-        {/* UPDATED: Scrollable container for long descriptions on small screens */}
         <div className="flex-grow overflow-y-auto max-h-[150px] custom-scrollbar pr-2">
-            <p className="text-sm leading-normal">{event.description}</p>
+          <p className="text-sm leading-normal">{event.description}</p>
         </div>
         
         <div className="mt-4 flex-shrink-0">
