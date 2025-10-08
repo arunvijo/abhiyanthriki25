@@ -156,7 +156,7 @@ const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
     <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
       <button
         onClick={() => setActiveFilter("technical")}
-        className={`flex-1 w-full py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center rounded-full
+        className={`flex-1 w-full py-1.5 text-white text-lg md:text-3xl uppercase font-['KH Interference'] tracking-wider text-center rounded-full
         }`}
       >
         Pre Events
@@ -306,20 +306,22 @@ const PreEvents = () => {
 
         {/* All content below will now inherit the correct font */}
         <div className="absolute inset-0 z-10 flex flex-col pt-0">
-            <div className="flex-shrink-0 sticky top-0 bg-transparent z-20 pt-8 md:pt-0">
-                <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-            </div>
+    {/* 1. Added solid background and bottom padding here */}
+    <div className="flex-shrink-0 sticky top-0  z-20 pt-8 md:pt-0 pb-6">
+        <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+    </div>
 
-            <div className="flex-grow overflow-y-scroll no-scrollbar pt-12 md:pt-16 pb-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
-                    {filteredEvents.map(event => (
-                        <EventCard key={event.id} event={event} onViewDetailsClick={setSelectedEvent} />
-                    ))}
-                </div>
-            </div>
-
-            <div className="flex-shrink-0 h-12 md:h-24"></div>
+    {/* 2. Removed top padding from here */}
+    <div className="flex-grow overflow-y-scroll no-scrollbar pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
+            {filteredEvents.map(event => (
+                <EventCard key={event.id} event={event} onViewDetailsClick={setSelectedEvent} />
+            ))}
         </div>
+    </div>
+
+    <div className="flex-shrink-0 h-12 md:h-24"></div>
+</div>
     </div>
 </main>
 
