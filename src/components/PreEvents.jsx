@@ -167,13 +167,23 @@ const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
 
 
 // --- EVENT MODAL ---
-
 const EventModal = ({ event, onClose }) => {
   if (!event) return null;
+  
   const handleModalContentClick = (e) => e.stopPropagation();
+  
+  // A helper component to avoid repetition for event details
+  const EventDetailItem = ({ icon: Icon, text, isDesktop = false }) => {
+    if (!text) return null;
+    return (
+      <div className="flex items-center">
+        <Icon className={`text-[#F64040] flex-shrink-0 ${isDesktop ? 'h-6 w-6 mr-4' : 'h-5 w-5 mr-3'}`} />
+        <span className={isDesktop ? 'text-base' : 'text-sm'}>{text}</span>
+      </div>
+    );
+  };
 
   return (
-    // The outer div now has the animation class to ensure the background fades in smoothly
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in" onClick={onClose}>
       <ImageClipPathSVG />
 
@@ -182,96 +192,63 @@ const EventModal = ({ event, onClose }) => {
         <div className="relative w-full aspect-[1269/715]">
           <EventDetailsBorderSVG />
           
-          <div className="absolute left-8 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-8">
-            <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl uppercase tracking-wider text-white">{event.title}</h2>
+          {/* UPDATED: Adjusted padding and spacing for better alignment */}
+          <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
+            <div className="flex flex-col space-y-8">
+              <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
               
-              <div className="space-y-3 text-sm text-neutral-300">
-                {event.date && (
-                  <div className="flex items-center space-x-3">
-                    {/* MODIFIED: Replaced emoji with FiCalendar icon */}
-                    <FiCalendar className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
-                    <span>{event.date}</span>
-                  </div>
-                )}
-                {event.venue && (
-                  <div className="flex items-center space-x-3">
-                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiMapPin className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
-                    <span>{event.venue}</span>
-                  </div>
-                )}
-                
-                {event.price && (
-                  <div className="flex items-center space-x-3">
-                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiDollarSign className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
-                    <span>{event.price}</span>
-                  </div>
-                )}
-                 
-                {event.timings && (
-                  <div className="flex items-center space-x-3">
-                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiClock className="text-[#F64040] h-[3vh] w-[3vw] flex-shrink-0" />
-                    <span>{event.timings}</span>
-                  </div>
-                )}
-
+              {/* NEW: 2x2 grid for event details */}
+              <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
+                <EventDetailItem icon={FiCalendar} text={event.date} isDesktop />
+                <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop />
+                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop />
+                <EventDetailItem icon={FiClock} text={event.timings} isDesktop />
               </div>
               
-              <p className="text-neutral-300 text-sm leading-relaxed max-h-[280px] overflow-y-auto custom-scrollbar pr-2">
+              {/* UPDATED: Increased max-height for description */}
+              <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                 {event.description}
               </p>
             </div>
             
-            <div className="mt-8">
+            <div className="mt-6">
               <DetailsRegisterButton href={event.registrationUrl} />
             </div>
           </div>
           
           <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full">
-            <img src={event.imageUrl || placeholderImage} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
+            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
             <ImageClipShapeSVG />
           </div>
         </div>
       </div>
 
       {/* MOBILE LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#F64040] rounded-2xl animate-scale-in flex flex-col p-6 space-y-4">
+      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#F64040] rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200">
         <img src={event.imageUrl} alt={event.title} className="w-full h-auto aspect-video object-cover rounded-lg" />
-        <div className="flex-grow flex flex-col justify-between overflow-hidden">
-          <div className="space-y-3 overflow-y-auto custom-scrollbar pr-2">
-            <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
-            
-            {(event.date || event.venue) && (
-              <div className="space-y-2 text-xs text-neutral-300">
-                {event.date && (
-                  <div className="flex items-center space-x-2">
-                    {/* MODIFIED: Replaced emoji with FiCalendar icon */}
-                    <FiCalendar className="text-[#F64040] h-3 w-3 flex-shrink-0" />
-                    <span>{event.date}</span>
-                  </div>
-                )}
-                {event.venue && (
-                  <div className="flex items-center space-x-2">
-                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiMapPin className="text-[#F64040] h-3 w-3 flex-shrink-0" />
-                    <span>{event.venue}</span>
-                  </div>
-                )}
-              </div>
-            )}
-            
-            <p className="text-neutral-300 text-sm leading-normal">{event.description}</p>
-          </div>
-          <div className="mt-6 flex-shrink-0">
-            <DetailsRegisterButton href={event.registrationUrl} />
-          </div>
+        
+        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
+
+        {/* NEW: 2x2 grid for event details on mobile */}
+        <div className="grid grid-cols-2 gap-4">
+          <EventDetailItem icon={FiCalendar} text={event.date} />
+          <EventDetailItem icon={FiMapPin} text={event.venue} />
+          <EventDetailItem icon={FiDollarSign} text={event.price} />
+          <EventDetailItem icon={FiClock} text={event.timings} />
+        </div>
+        
+        {/* UPDATED: Scrollable container for long descriptions on small screens */}
+        <div className="flex-grow overflow-y-auto max-h-[150px] custom-scrollbar pr-2">
+            <p className="text-sm leading-normal">{event.description}</p>
+        </div>
+        
+        <div className="mt-4 flex-shrink-0">
+          <DetailsRegisterButton href={event.registrationUrl} />
         </div>
       </div>
 
-      <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 md:top-6 md:right-6 text-neutral-400 hover:text-white transition-colors z-50">
+      {/* Close Button */}
+      <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -279,7 +256,6 @@ const EventModal = ({ event, onClose }) => {
     </div>
   );
 };
-
 
 // --- MAIN PAGE ---
 
