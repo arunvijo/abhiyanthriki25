@@ -12,23 +12,12 @@ import SponsorsSection from './SponsorsSection';
 const HomePage = () => {
   return (
     <>
-      {/* <HeroSection />
+       <HeroSection />
       <AboutSection />
-      <CollegeSection /> */}
-      {/* <SponsorsSection /> */}
-      {/* <EventSection />
-      <GallerySection /> */}
- <div style={{
-    color: '#F64040',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    fontSize: '2rem',
-    fontWeight: 'bold'
-}}>
-  Coming Soon...
-</div>
+      <CollegeSection />
+      <SponsorsSection />
+       <EventSection />
+      <GallerySection />
     </>
   );
 };
