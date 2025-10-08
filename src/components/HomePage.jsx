@@ -12,12 +12,13 @@ import SponsorsSection from './SponsorsSection';
 const HomePage = () => {
   return (
     <>
-       <HeroSection />
+      <HeroSection />
       <AboutSection />
       <CollegeSection />
-      <SponsorsSection />
-       <EventSection />
+      {/* <SponsorsSection /> */}
+      <EventSection />
       <GallerySection />
+      {/* ✅ ADDED: The new SponsorsSection is now part of your homepage layout */}
     </>
   );
 };
