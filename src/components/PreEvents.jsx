@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from "react";
-import allEvents from "../data/EventData"; 
-// NEW: Import icons from the Feather Icons library
-import { FiCalendar, FiMapPin } from 'react-icons/fi';
-// --- SVG COMPONENTS ---
-
-
+import preEvents from "../data/PreeventsData"; 
 import { Suspense, lazy } from 'react';
-// import { Routes, Route } from 'react-router-dom'; // Keep commented as per original
 
 import AnimatedBackground from '/src/components/AnimatedBackground';
 import TargetCursor from '/src/components/TargetCursor.jsx';
+
+//Placeholder image for prevents
+import placeholderImage from "/public/keyboardwire.png";
+// NEW: Import icons from the Feather Icons library
+import { FiCalendar, FiMapPin } from 'react-icons/fi';
+// --- SVG COMPONENTS ---
 
 const ImageClipPathSVG = () => (
   <svg width="0" height="0" className="absolute">
@@ -117,7 +117,7 @@ const DetailsRegisterButton = ({ href }) => (
 
 
 const ViewDetailsButton = ({ onClick }) => (
-  <button onClick={onClick} className="cursor-none cursor-target relative w-full h-[50px] group text-white font-['KH Interference'] tracking-widest uppercase text-sm hover:opacity-80 transition-opacity">
+  <button onClick={onClick} className="cursor-none cursor-target mb-6 relative w-full h-[50px] group text-white font-['KH Interference'] tracking-widest uppercase text-sm hover:opacity-80 transition-opacity">
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 379 84" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11 1H368C373.523 1 378 5.47716 378 11V37.2012C378 39.9827 376.841 42.639 374.803 44.5312L356.591 61.4326L334.06 80.6143C332.251 82.154 329.953 83 327.577 83H51.4229C49.0474 83 46.7492 82.154 44.9404 80.6143L22.4082 61.4326L4.19727 44.5312C2.15851 42.639 1 39.9827 1 37.2012V11C1 5.47715 5.47715 1 11 1Z" stroke="#F64040" strokeWidth="2" />
     </svg>
@@ -129,34 +129,47 @@ const ViewDetailsButton = ({ onClick }) => (
 
 const EventCard = ({ event, onViewDetailsClick }) => (
   <div className="relative w-11/12 mx-auto aspect-[464/636]">
-    <CardShapeSVG />
-    <div className="absolute inset-0 p-6 flex flex-col">
-      <div className="flex-grow space-y-2 mb-2">
-        <h3 className="text-xl font-['KH Interference'] text-white leading-tight">{event.title}</h3>
-        <p className="text-neutral-400 text-xs leading-snug">{event.description.substring(0, 150)}...</p>
+    {/* SVG background shape with visible border */}
+    <CardShapeSVG className="absolute inset-0 w-full h-full z-0" />
+
+    {/* Content container positioned over the SVG */}
+    <div className="absolute inset-0 flex flex-col justify-between z-10">
+      {/* Image fills top vertically, leaves space on left/right */}
+      <div className="flex-grow-[0.8] flex items-center justify-center overflow-hidden px-2">
+        <img
+          src={event.image || placeholderImage}
+          alt={event.title}
+          className="w-full h-full object-cover rounded-[inherit]"
+        />
       </div>
-      <div className="flex-shrink-0 mt-auto">
-        <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
+
+      {/* Button area (bottom part) */}
+      <div className="flex justify-center items-end pb-6">
+        <div className="w-3/4 md:w-2/3">
+          <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
+        </div>
       </div>
     </div>
   </div>
 );
+
 
 // --- FILTER NAVIGATION ---
 
 const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
   <div className="flex justify-center -mt-5 md:-mt-2">
     <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
-      <div className={`absolute top-1/2 -translate-y-1/2 left-1.5 w-[calc(50%-6px)] h-[calc(100%-12px)] bg-red-600 rounded-full transition-transform duration-300 ease-out ${activeFilter === 'non-technical' ? 'translate-x-full' : 'translate-x-0'}`}></div>
-      <button onClick={() => setActiveFilter("technical")} className="cursor-pointer relative flex-1 py-2 text-white text-xs md:text-sm uppercase font-['KH Interference'] tracking-wider text-center">
-        Technical Events
-      </button>
-      <button onClick={() => setActiveFilter("non-technical")} className="cursor-pointer relative flex-1 py-2 text-white text-xs md:text-sm uppercase font-['KH Interference'] tracking-wider text-center">
-        Non-Technical Events
+      <button
+        onClick={() => setActiveFilter("technical")}
+        className={`flex-1 w-full py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center rounded-full
+        }`}
+      >
+        Pre Events
       </button>
     </div>
   </div>
 );
+
 
 // --- EVENT MODAL ---
 
@@ -206,7 +219,7 @@ const EventModal = ({ event, onClose }) => {
           </div>
           
           <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full">
-            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
+            <img src={event.imageUrl || placeholderImage} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
             <ImageClipShapeSVG />
           </div>
         </div>
@@ -258,50 +271,50 @@ const EventModal = ({ event, onClose }) => {
 
 // --- MAIN PAGE ---
 
-const EventsPage = () => {
-  const [activeFilter, setActiveFilter] = useState("technical");
+const PreEvents = () => {
+  const [activeFilter, setActiveFilter] = useState("preevents");
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const filteredEvents = useMemo(() => {
-    return allEvents.filter(event => event.category === activeFilter);
+    return preEvents.filter(event => event.category === activeFilter);
   }, [activeFilter]);
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col">
-      {/* <AnimatedBackground />
-      <div className="hidden md:block">
-        <TargetCursor
-          spinDuration={2}
-          hideDefaultCursor={true}
-        />
-      </div> */}
-
-      {/* Main content area now expands to fill available space */}
-      <div className="relative z-10 flex flex-col flex-grow">
-        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
-          
-          {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
-          <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
-            <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
-              Coming Soon
-            </h1>
+          {/* <AnimatedBackground />
+          <div className="hidden md:block">
+            <TargetCursor
+              spinDuration={2}
+              hideDefaultCursor={true}
+            />
+          </div> */}
+    
+          {/* Main content area now expands to fill available space */}
+          <div className="relative z-10 flex flex-col flex-grow">
+            <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
+              
+              {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
+              <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
+                <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
+                  Coming Soon
+                </h1>
+              </div>
+    
+              {/* Original routes are kept commented out as they were in your file */}
+              {/* <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<HomePage />} />
+                  <Route path="eventdetails" element={<EventDetails />} />
+                </Route>
+              </Routes> */}
+            </Suspense>
           </div>
-
-          {/* Original routes are kept commented out as they were in your file */}
-          {/* <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="eventdetails" element={<EventDetails />} />
-            </Route>
-          </Routes> */}
-        </Suspense>
-      </div>
-
-      {/* NEW: Added a footer for developer credits */}
-      <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
-        <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
-      </footer>
-    </div>
+    
+          {/* NEW: Added a footer for developer credits */}
+          <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
+            <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
+          </footer>
+        </div>
 //     <>
 //       <style>{`
 //         @import url('https://fonts.cdnfonts.com/css/kh-interference');
@@ -336,7 +349,7 @@ const EventsPage = () => {
 //             <div className="flex-shrink-0 sticky top-0 bg-transparent z-20 pt-8 md:pt-0">
 //                 <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
 //             </div>
-            
+
 //             <div className="flex-grow overflow-y-scroll no-scrollbar pt-12 md:pt-16 pb-12">
 //                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
 //                     {filteredEvents.map(event => (
@@ -355,4 +368,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default PreEvents;

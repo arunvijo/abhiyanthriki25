@@ -6,6 +6,7 @@ import FooterSection from './FooterSection';
 const Layout = () => {
   const location = useLocation();
   const isEventDetailPage = location.pathname === '/eventdetails';
+  const isPreEventPage = location.pathname === '/preevents';
 
   return (
     <>
@@ -18,7 +19,7 @@ const Layout = () => {
       {/* <Navbar /> */}
 
       {/* ✅ Footer is hidden only on event details page */}
-      {!isEventDetailPage && <FooterSection />}
+      {!isEventDetailPage && !isPreEventPage && <FooterSection />}
     </>
   );
 };

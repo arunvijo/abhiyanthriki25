@@ -9,6 +9,7 @@ import TargetCursor from './components/TargetCursor.jsx';
 // Lazily load page components
 const HomePage = lazy(() => import('./components/HomePage'));
 const EventDetails = lazy(() => import('./components/EventDetails'));
+const PreEvents = lazy(() => import('./components/PreEvents'));
 
 function App() {
   return (
@@ -24,25 +25,14 @@ function App() {
 
       {/* Main content area now expands to fill available space */}
       <div className="relative z-10 flex flex-col flex-grow">
-        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
-          
-          {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
-          <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
-            <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
-              Coming Soon
-            </h1>
-            <p className="text-neutral-300 text-lg sm:text-xl md:text-2xl mt-4">
-              Launching Tomorrow!
-            </p>
-          </div>
-
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}
           {/* Original routes are kept commented out as they were in your file */}
-          {/* <Routes>
+          {<Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
               <Route path="eventdetails" element={<EventDetails />} />
             </Route>
-          </Routes> */}
+          </Routes>}
         </Suspense>
       </div>
 
