@@ -6,7 +6,7 @@ import AnimatedBackground from '/src/components/AnimatedBackground';
 import TargetCursor from '/src/components/TargetCursor.jsx';
 
 //Placeholder image for prevents
-import placeholderImage from "/public/keyboardwire.png";
+import placeholderImage from "/keyboardwire.png";
 // NEW: Import icons from the Feather Icons library
 import { FiCalendar, FiMapPin } from 'react-icons/fi';
 // --- SVG COMPONENTS ---
@@ -128,26 +128,21 @@ const ViewDetailsButton = ({ onClick }) => (
 // --- EVENT CARD ---
 
 const EventCard = ({ event, onViewDetailsClick }) => (
+  // ✨ "w-11/12" makes the card narrower, "mx-auto" centers it.
   <div className="relative w-11/12 mx-auto aspect-[464/636]">
-    {/* SVG background shape with visible border */}
-    <CardShapeSVG className="absolute inset-0 w-full h-full z-0" />
+    <CardShapeSVG />
 
-    {/* Content container positioned over the SVG */}
-    <div className="absolute inset-0 flex flex-col justify-between z-10">
-      {/* Image fills top vertically, leaves space on left/right */}
-      <div className="flex-grow-[0.8] flex items-center justify-center overflow-hidden px-2">
+    <div className="absolute inset-0 p-6 flex flex-col">
+      <div className="h-[80vh] mt-3 mb-2 w-full rounded-2xl overflow-hidden">
         <img
-          src={event.image || placeholderImage}
+       src={event.imageUrl || placeholderImage}
           alt={event.title}
-          className="w-full h-full object-cover rounded-[inherit]"
-        />
+          className="w-full h-full object-cover rounded"
+         />
       </div>
 
-      {/* Button area (bottom part) */}
-      <div className="flex justify-center items-end pb-6">
-        <div className="w-3/4 md:w-2/3">
-          <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
-        </div>
+      <div className="flex-shrink-0 mt-auto">
+        <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
       </div>
     </div>
   </div>
@@ -280,91 +275,56 @@ const PreEvents = () => {
   }, [activeFilter]);
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col">
-          {/* <AnimatedBackground />
-          <div className="hidden md:block">
-            <TargetCursor
-              spinDuration={2}
-              hideDefaultCursor={true}
-            />
-          </div> */}
-    
-          {/* Main content area now expands to fill available space */}
-          <div className="relative z-10 flex flex-col flex-grow">
-            <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
-              
-              {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
-              <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
-                <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
-                  Coming Soon
-                </h1>
-              </div>
-    
-              {/* Original routes are kept commented out as they were in your file */}
-              {/* <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<HomePage />} />
-                  <Route path="eventdetails" element={<EventDetails />} />
-                </Route>
-              </Routes> */}
-            </Suspense>
-          </div>
-    
-          {/* NEW: Added a footer for developer credits */}
-          <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
-            <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
-          </footer>
-        </div>
-//     <>
-//       <style>{`
-//         @import url('https://fonts.cdnfonts.com/css/kh-interference');
+    <>
+      <style>{`
+        @import url('https://fonts.cdnfonts.com/css/kh-interference');
         
-//         .font-kh-interference { font-family: 'KH Interference', sans-serif; }
-//         .dot-grid { background-image: radial-gradient(circle at 1px 1px, rgba(200, 200, 200, 0.2) 1px, transparent 0); background-size: 20px 20px; }
-//         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-//         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-//         .custom-scrollbar::-webkit-scrollbar-thumb { background: #F64040; border-radius: 2px; }
-//         .no-scrollbar::-webkit-scrollbar { display: none; }
-//         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-//         @keyframes scale-in {
-//           from { transform: scale(0.9) translateY(20px); opacity: 0; }
-//           to { transform: scale(1) translateY(0); opacity: 1; }
-//         }
-//         .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-//       `}</style>
+        .font-kh-interference { font-family: 'KH Interference', sans-serif; }
+        .dot-grid { background-image: radial-gradient(circle at 1px 1px, rgba(200, 200, 200, 0.2) 1px, transparent 0); background-size: 20px 20px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #F64040; border-radius: 2px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes scale-in {
+          from { transform: scale(0.9) translateY(20px); opacity: 0; }
+          to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+      `}</style>
 
-//       <main className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black">
-//     <div className="relative w-full h-full max-w-screen-2xl">
-//         <div className="absolute inset-0 z-0 pointer-events-none">
-//             <div className="hidden md:block w-full h-full">
-//                 <DesktopPageBorderSVG />
-//             </div>
-//             <div className="block md:hidden w-full h-full">
-//                 <MobilePageBorderSVG />
-//             </div>
-//         </div>
+      <main className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black">
+    <div className="relative w-full h-full max-w-screen-2xl">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="hidden md:block w-full h-full">
+                <DesktopPageBorderSVG />
+            </div>
+            <div className="block md:hidden w-full h-full">
+                <MobilePageBorderSVG />
+            </div>
+        </div>
 
-//         {/* All content below will now inherit the correct font */}
-//         <div className="absolute inset-0 z-10 flex flex-col pt-0">
-//             <div className="flex-shrink-0 sticky top-0 bg-transparent z-20 pt-8 md:pt-0">
-//                 <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-//             </div>
+        {/* All content below will now inherit the correct font */}
+        <div className="absolute inset-0 z-10 flex flex-col pt-0">
+            <div className="flex-shrink-0 sticky top-0 bg-transparent z-20 pt-8 md:pt-0">
+                <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+            </div>
 
-//             <div className="flex-grow overflow-y-scroll no-scrollbar pt-12 md:pt-16 pb-12">
-//                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
-//                     {filteredEvents.map(event => (
-//                         <EventCard key={event.id} event={event} onViewDetailsClick={setSelectedEvent} />
-//                     ))}
-//                 </div>
-//             </div>
+            <div className="flex-grow overflow-y-scroll no-scrollbar pt-12 md:pt-16 pb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
+                    {filteredEvents.map(event => (
+                        <EventCard key={event.id} event={event} onViewDetailsClick={setSelectedEvent} />
+                    ))}
+                </div>
+            </div>
 
-//             <div className="flex-shrink-0 h-12 md:h-24"></div>
-//         </div>
-//     </div>
-// </main>
+            <div className="flex-shrink-0 h-12 md:h-24"></div>
+        </div>
+    </div>
+</main>
 
-//       <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-//     </>
+      <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+    </>
   );
 };
 
