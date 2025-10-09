@@ -1,4 +1,4 @@
-import image from "/public/keyboardwire.png";
+import image from "/keyboardwire.png";
 // --- EVENT DATA ARRAY ---
 // Each event now has a 'registrationUrl' property.
 export const preEvents = [
@@ -11,8 +11,8 @@ export const preEvents = [
         venue: "Sycamore Lab", 
         timings:"7:00PM to 7:30",
         price:"100 per person" ,
-        imageUrl: image,
-        registrationUrl: "https://konfhub.com/ai-robotics-expo" // Your specific event URL
+        imageUrl: "/PreEvents/Type Rush.jpg",
+        registrationUrl: "https://konfhub.com/type-rush" // Your specific event URL
     },
      { 
         id: 2, 
@@ -24,7 +24,7 @@ export const preEvents = [
         timings:"9:00AM to 6:00PM",
         price:"150 per team" ,
         imageUrl: "/PreEvents/REELNAISSANCE.jpg",
-        registrationUrl: "https://konfhub.com/reelnaissance" // Your specific event URL
+        registrationUrl: "https://konfhub.com/reelnaissance-08dbe6b3" // Your specific event URL
     },
      { 
         id: 3, 
@@ -36,7 +36,7 @@ export const preEvents = [
         timings:"9:00AM to 6:00PM",
         price:"100 per person" ,
         imageUrl: image,
-        registrationUrl: "https://konfhub.com/ai-robotics-expo" // Your specific event URL
+        registrationUrl: "https://konfhub.com/lenzura" // Your specific event URL
     },
      
 ];
