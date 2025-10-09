@@ -11,6 +11,8 @@ import TargetCursor from './components/TargetCursor.jsx';
 const HomePage = lazy(() => import('./components/HomePage'));
 const EventDetails = lazy(() => import('./components/EventDetails'));
 const PreEvents = lazy(() => import('./components/PreEvents'));
+const NonTech = lazy(() => import('./components/NonTech'));
+const Tech = lazy(() => import('./components/TechEvents'));
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="eventdetails" element={<EventDetails />} />
           <Route path="preevents" element={<PreEvents />} />
+          <Route path="nontech" element={<NonTech />} />
+          <Route path="tech" element={<Tech />} />
         </Route>
       </Routes>
     </Suspense>

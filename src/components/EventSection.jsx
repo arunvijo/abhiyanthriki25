@@ -19,6 +19,12 @@ export default function EventSection() {
   const handleCardClick2 = () => {
     navigate('/preevents');
   };
+  const handleCardClick3 = () => {
+    navigate('/tech');
+  };
+  const handleCardClick4 = () => {
+    navigate('/nontech');
+  };
   
   
   return (
@@ -57,7 +63,7 @@ export default function EventSection() {
           {/* Tech card */}
           <div
             className="cursor-target relative w-[80vw] md:w-[28%] max-w-[460px] rounded-[18px] overflow-hidden transform-gpu transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_22px_70px_rgba(0,0,0,0.45)] hover:translate-y-[-6px] hover:scale-[1.02]"
-            onClick={handleCardClick}
+            onClick={handleCardClick3}
           >
             <img src={techCard} alt="Tech card" className="w-full h-auto object-contain select-none" draggable={false} />
           </div>
