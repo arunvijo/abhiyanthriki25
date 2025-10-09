@@ -35,7 +35,7 @@ export const preEvents = [
         venue: "Sycamore Lab", 
         timings:"9:00AM to 6:00PM",
         price:"100 per person" ,
-        imageUrl: image,
+        imageUrl: "/PreEvents/Lenzura.jpg",
         registrationUrl: "https://konfhub.com/lenzura" // Your specific event URL
     },
      
