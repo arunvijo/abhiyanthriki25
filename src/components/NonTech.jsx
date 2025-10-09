@@ -159,7 +159,7 @@ const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
         className={`flex-1 w-full py-1.5 text-white text-lg md:text-3xl uppercase font-['KH Interference'] tracking-wider text-center rounded-full
         }`}
       >
-        Non Tech
+        Non Technical
       </button>
     </div>
   </div>
@@ -315,6 +315,7 @@ const NonTech = () => {
             </div>
 
             {/* 3. This spacer has been removed */}
+            <div className="flex-shrink-0 h-12 md:h-24"></div>
         </div>
     </div>
 </main>
