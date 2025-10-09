@@ -37,7 +37,7 @@ export const preEvents = [
         timings: "2PM",
         price: "150 per team",
         imageUrl: "/TechEvents/BLIND BUILD.jpg",
-        registrationUrl: "https://konfhub.com/blind-build-20-944ad8d4"
+        registrationUrl: "https://konfhub.com/blind-build-20"
     },
     // {
     //     id: 4,
