@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import preEvents from "../data/PreeventsData"; 
+import preEvents from "../data/NonTech"; 
 import { Suspense, lazy } from 'react';
 
 import AnimatedBackground from '/src/components/AnimatedBackground';
@@ -159,7 +159,7 @@ const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
         className={`flex-1 w-full py-1.5 text-white text-lg md:text-3xl uppercase font-['KH Interference'] tracking-wider text-center rounded-full
         }`}
       >
-        Pre Events
+        Non Tech
       </button>
     </div>
   </div>
@@ -260,7 +260,7 @@ const EventModal = ({ event, onClose }) => {
 
 // --- MAIN PAGE ---
 
-const PreEvents = () => {
+const NonTech = () => {
   const [activeFilter, setActiveFilter] = useState("preevents");
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -324,4 +324,4 @@ const PreEvents = () => {
   );
 };
 
-export default PreEvents;
+export default NonTech;

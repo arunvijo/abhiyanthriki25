@@ -52,7 +52,7 @@ const Navbar = () => {
           onClick={handleRegister}
           className="cursor-target cursor-none bg-red-600 text-white font-bold py-1.5 md:py-2 px-4 md:px-5 rounded-full border-2 border-transparent hover:bg-transparent hover:border-red-600 transition-all duration-300 uppercase tracking-widest text-[0.7rem] md:text-sm whitespace-nowrap"
         >
-          Register
+          Contact
         </button>
       </nav>
     </header>

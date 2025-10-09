@@ -7,6 +7,8 @@ const Layout = () => {
   const location = useLocation();
   const isEventDetailPage = location.pathname === '/eventdetails';
   const isPreEventPage = location.pathname === '/preevents';
+  const isNonTechPage = location.pathname === '/nontech';
+  const isTechPage = location.pathname === '/tech';
 
   return (
     <>
@@ -19,7 +21,7 @@ const Layout = () => {
       {!isEventDetailPage && <Navbar />}
 
       {/* ✅ Footer is hidden only on event details page */}
-      {!isEventDetailPage && !isPreEventPage && <FooterSection />}
+      {!isEventDetailPage && !isPreEventPage && !isNonTechPage && !isTechPage && <FooterSection />}
     </>
   );
 };
