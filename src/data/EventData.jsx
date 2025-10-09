@@ -109,9 +109,9 @@ export const allEvents = [
         date: "Oct 15, 2025",
         venue: "Chavara Hall",
         timings: null,
-        price: null,
+        price: "1000 per team",
         imageUrl: "/NonTechEvents/Dciblz.jpg",
-        registrationUrl: null
+        registrationUrl: "https://konfhub.com/decibelz"
     },
     {
         id: 13,
@@ -120,10 +120,10 @@ export const allEvents = [
         description: "Lets students act as IPL team owners in a fast-paced auction, bidding for players and building dream teams.",
         date: "Oct 15, 2025",
         venue: "Gallery Hall",
-        timings: null,
-        price: null,
+        timings: "9:00AM to 6:00PM",
+        price: "75 per person",
         imageUrl: "/NonTechEvents/CRICKONOMICS.jpg",
-        registrationUrl: null
+        registrationUrl: "https://konfhub.com/crickonomics"
     },
     {
         id: 14,
@@ -132,10 +132,10 @@ export const allEvents = [
         description: "Spreads awareness about women’s health in a creative way, featuring expert talks and a period-pain simulator.",
         date: "Oct 15, 2025",
         venue: "Seminar Hall (KE BLOCK 4th Floor)",
-        timings: null,
-        price: null,
+        timings: "10:00AM to 12:00PM",
+        price: "Free Entry",
         imageUrl: "/NonTechEvents/Red Code.jpg",
-        registrationUrl: null
+        registrationUrl: "https://konfhub.com/redcode"
     },
     {
         id: 15,
@@ -144,10 +144,10 @@ export const allEvents = [
         description: "Turns the campus into a fun mystery game where players solve clues, complete tasks, and find the ‘imposter’.",
         date: "Oct 15, 2025",
         venue: "All Around Campus",
-        timings: null,
-        price: null,
+        timings: "09:00AM to 04:00PM",
+        price: "120 per person",
         imageUrl: "/NonTechEvents/Among Us.jpg",
-        registrationUrl: null
+        registrationUrl: "https://konfhub.com/among-us-1951881c"
     },
     {
         id: 17,

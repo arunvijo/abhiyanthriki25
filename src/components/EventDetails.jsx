@@ -291,62 +291,97 @@ const EventsPage = () => {
   }, [activeFilter]);
 
   return (
-    <>
-      <style>{`
-        /* ... existing styles ... */
+    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col">
+      {/* <AnimatedBackground />
+      <div className="hidden md:block">
+        <TargetCursor
+          spinDuration={2}
+          hideDefaultCursor={true}
+        />
+      </div> */}
+
+      {/* Main content area now expands to fill available space */}
+      <div className="relative z-10 flex flex-col flex-grow">
+        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
+          
+          {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
+          <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
+            <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
+              Coming Soon
+            </h1>
+          </div>
+
+          {/* Original routes are kept commented out as they were in your file */}
+          {/* <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="eventdetails" element={<EventDetails />} />
+            </Route>
+          </Routes> */}
+        </Suspense>
+      </div>
+
+      {/* NEW: Added a footer for developer credits */}
+      <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
+        <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
+      </footer>
+    </div>
+//     <>
+//       <style>{`
+//         /* ... existing styles ... */
         
-        /* NEW: Custom scrollbar color variable */
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--active-color, #F64040); border-radius: 2px; }
-      `}</style>
+//         /* NEW: Custom scrollbar color variable */
+//         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--active-color, #F64040); border-radius: 2px; }
+//       `}</style>
 
-      {/* NEW: Pass activeColor as a CSS variable to the main element */}
-      <main 
-        className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black"
-        style={{ '--active-color': activeColor }}
-      >
-        <div className="relative w-full h-full max-w-screen-2xl">
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="hidden md:block w-full h-full">
-              {/* Pass the color prop to your SVG components */}
-              <DesktopPageBorderSVG color={activeColor} />
-            </div>
-            <div className="block md:hidden w-full h-full">
-              <MobilePageBorderSVG color={activeColor} />
-            </div>
-          </div>
+//       {/* NEW: Pass activeColor as a CSS variable to the main element */}
+//       <main 
+//         className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black"
+//         style={{ '--active-color': activeColor }}
+//       >
+//         <div className="relative w-full h-full max-w-screen-2xl">
+//           <div className="absolute inset-0 z-0 pointer-events-none">
+//             <div className="hidden md:block w-full h-full">
+//               {/* Pass the color prop to your SVG components */}
+//               <DesktopPageBorderSVG color={activeColor} />
+//             </div>
+//             <div className="block md:hidden w-full h-full">
+//               <MobilePageBorderSVG color={activeColor} />
+//             </div>
+//           </div>
 
-          <div className="absolute inset-0 z-10 flex flex-col pt-0">
-            <div className="flex-shrink-0 sticky top-0 z-20 pt-8 md:pt-0 pb-6">
-  <FilterNavigation 
-    activeFilter={activeFilter} 
-    setActiveFilter={setActiveFilter} 
-    color={activeColor} 
-  />
-</div>
+//           <div className="absolute inset-0 z-10 flex flex-col pt-0">
+//             <div className="flex-shrink-0 sticky top-0 z-20 pt-8 md:pt-0 pb-6">
+//   <FilterNavigation 
+//     activeFilter={activeFilter} 
+//     setActiveFilter={setActiveFilter} 
+//     color={activeColor} 
+//   />
+// </div>
 
-            <div className="flex-grow overflow-y-scroll no-scrollbar pb-20">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
-                {filteredEvents.map(event => (
-                  <EventCard 
-                    key={event.id} 
-                    event={event} 
-                    onViewDetailsClick={setSelectedEvent} 
-                    color={activeColor} 
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="flex-shrink-0 h-12 md:h-24"></div>
-          </div>
-        </div>
-      </main>
+//             <div className="flex-grow overflow-y-scroll no-scrollbar pb-20">
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
+//                 {filteredEvents.map(event => (
+//                   <EventCard 
+//                     key={event.id} 
+//                     event={event} 
+//                     onViewDetailsClick={setSelectedEvent} 
+//                     color={activeColor} 
+//                   />
+//                 ))}
+//               </div>
+//             </div>
+//             <div className="flex-shrink-0 h-12 md:h-24"></div>
+//           </div>
+//         </div>
+//       </main>
 
-      <EventModal 
-        event={selectedEvent} 
-        onClose={() => setSelectedEvent(null)} 
-        color={activeColor} 
-      />
-    </>
+//       <EventModal 
+//         event={selectedEvent} 
+//         onClose={() => setSelectedEvent(null)} 
+//         color={activeColor} 
+//       />
+//     </>
   );
 };
 
