@@ -72,7 +72,7 @@ export const preEvents = [
         venue: "Classroom-LH 5",
         timings: "8.30AM",
         price: "150 per team",
-        imageUrl: "TechEvents/AGENTS 101.jpg",
+        imageUrl: "TechEvents/CodeQuest.jpg",
         registrationUrl: "https://konfhub.com/code-quest-e82ed0f0"
     },
     {
@@ -84,7 +84,7 @@ export const preEvents = [
         venue: "Zuse Lab",
         timings: "9.00AM",
         price: "100 per person",
-        imageUrl: "TechEvents/CodeQuest.jpg",
+        imageUrl: "TechEvents/AGENTS 101.jpg",
         registrationUrl: "https://konfhub.com/agents-101-12f9e488"
     },
     {
