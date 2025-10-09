@@ -315,6 +315,7 @@ const TechEvents = () => {
             </div>
 
             {/* 3. This spacer has been removed */}
+            <div className="flex-shrink-0 h-12 md:h-24"></div>
         </div>
     </div>
 </main>
