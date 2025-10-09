@@ -153,7 +153,7 @@ const EventCard = ({ event, onViewDetailsClick }) => (
 
 const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
   <div className="flex justify-center -mt-5 md:-mt-2">
-    <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
+    <div className="relative flex items-center justify-center p-1.5 border-2 border-[#0073FF] rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
       <button
         onClick={() => setActiveFilter("technical")}
         className={`flex-1 w-full py-1.5 text-white text-lg md:text-3xl uppercase font-['KH Interference'] tracking-wider text-center rounded-full
@@ -222,31 +222,35 @@ const EventModal = ({ event, onClose }) => {
       </div>
 
       {/* MOBILE LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#0073FF] rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200 my-8">
-        {/* UPDATED: Changed aspect ratio and object-fit for the poster */}
-        <img 
-            src={event.imageUrl} 
-            alt={event.title} 
-            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
-        />
-        
-        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          <EventDetailItem icon={FiCalendar} text={event.date} />
-          <EventDetailItem icon={FiMapPin} text={event.venue} />
-          <EventDetailItem icon={FiDollarSign} text={event.price} />
-          <EventDetailItem icon={FiClock} text={event.timings} />
-        </div>
-        
-        <div className="flex-grow overflow-y-auto max-h-[150px] custom-scrollbar pr-2">
-          <p className="text-sm leading-normal">{event.description}</p>
-        </div>
-        
-        <div className="mt-4 flex-shrink-0">
-          <DetailsRegisterButton href={event.registrationUrl} />
-        </div>
-      </div>
+      <div 
+                onClick={handleModalContentClick} 
+                className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#0073FF] rounded-2xl animate-scale-in flex flex-col my-8 max-h-[90vh]"
+            >
+                {/* ✅ Scrollable Content Area */}
+                <div className="flex-grow overflow-y-auto custom-scrollbar p-6">
+                    <div className="space-y-5">
+                        <img 
+                            src={event.imageUrl} 
+                            alt={event.title} 
+                            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
+                        />
+                        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
+                        <div className="grid grid-cols-2 gap-4 text-neutral-300">
+                            <EventDetailItem icon={FiCalendar} text={event.date} />
+                            <EventDetailItem icon={FiMapPin} text={event.venue} />
+                            <EventDetailItem icon={FiDollarSign} text={event.price} />
+                            <EventDetailItem icon={FiClock} text={event.timings} />
+                        </div>
+                        {/* Description no longer needs a max-height here */}
+                        <p className="text-sm leading-normal text-neutral-300">{event.description}</p>
+                    </div>
+                </div>
+                
+                {/* ✅ Sticky Footer/Button Area */}
+                <div className="flex-shrink-0 p-6 pt-4 border-t border-gray-700/50">
+                    <DetailsRegisterButton href={event.registrationUrl} />
+                </div>
+            </div>
 
       {/* Close Button */}
       <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">

@@ -153,7 +153,7 @@ const EventCard = ({ event, onViewDetailsClick }) => (
 
 const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
   <div className="flex justify-center -mt-5 md:-mt-2">
-    <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
+    <div className="relative flex items-center justify-center p-1.5 border-2 border-[#0073FF] rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
       <button
         onClick={() => setActiveFilter("technical")}
         className={`flex-1 w-full py-1.5 text-white text-lg md:text-3xl uppercase font-['KH Interference'] tracking-wider text-center rounded-full
@@ -167,97 +167,96 @@ const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
 
 
 // --- EVENT MODAL ---
+
 const EventModal = ({ event, onClose }) => {
-  if (!event) return null;
-  
-  const handleModalContentClick = (e) => e.stopPropagation();
-  
-  const EventDetailItem = ({ icon: Icon, text, isDesktop = false }) => {
-    if (!text) return null;
+    if (!event) return null;
+
+    const handleModalContentClick = (e) => e.stopPropagation();
+
+    const EventDetailItem = ({ icon: Icon, text, isDesktop = false }) => {
+        if (!text) return null;
+        return (
+            <div className="flex items-center">
+                <Icon className={`text-[#0073FF] flex-shrink-0 ${isDesktop ? 'h-6 w-6 mr-4' : 'h-5 w-5 mr-3'}`} />
+                <span className={isDesktop ? 'text-base' : 'text-sm'}>{text}</span>
+            </div>
+        );
+    };
+
     return (
-      <div className="flex items-center">
-        <Icon className={`text-[#0073FF] flex-shrink-0 ${isDesktop ? 'h-6 w-6 mr-4' : 'h-5 w-5 mr-3'}`} />
-        <span className={isDesktop ? 'text-base' : 'text-sm'}>{text}</span>
-      </div>
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in overflow-y-auto" onClick={onClose}>
+            {/* --- SVGs for Desktop --- */}
+            <div className='hidden md:block'>
+                <ImageClipPathSVG />
+                <ImageClipShapeSVG />
+            </div>
+
+            {/* --- DESKTOP LAYOUT (Unchanged) --- */}
+            <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in my-8">
+                <div className="relative w-full aspect-[1269/715]">
+                    <EventDetailsBorderSVG />
+                    <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
+                        <div className="flex flex-col space-y-8">
+                            <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
+                            <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
+                                <EventDetailItem icon={FiCalendar} text={event.date} isDesktop />
+                                <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop />
+                                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop />
+                                <EventDetailItem icon={FiClock} text={event.timings} isDesktop />
+                            </div>
+                            <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
+                                {event.description}
+                            </p>
+                        </div>
+                        <div className="mt-6">
+                            <DetailsRegisterButton href={event.registrationUrl} />
+                        </div>
+                    </div>
+                    <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full bg-black/30">
+                        <img src={event.imageUrl} alt={event.title} className="w-full h-full object-contain" style={{ clipPath: 'url(#image-clip)' }} />
+                    </div>
+                </div>
+            </div>
+
+            {/* ---  মোবাইলের জন্য উন্নত লেআউট (IMPROVED MOBILE LAYOUT) --- */}
+            <div 
+                onClick={handleModalContentClick} 
+                className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#0073FF] rounded-2xl animate-scale-in flex flex-col my-8 max-h-[90vh]"
+            >
+                {/* ✅ Scrollable Content Area */}
+                <div className="flex-grow overflow-y-auto custom-scrollbar p-6">
+                    <div className="space-y-5">
+                        <img 
+                            src={event.imageUrl} 
+                            alt={event.title} 
+                            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
+                        />
+                        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
+                        <div className="grid grid-cols-2 gap-4 text-neutral-300">
+                            <EventDetailItem icon={FiCalendar} text={event.date} />
+                            <EventDetailItem icon={FiMapPin} text={event.venue} />
+                            <EventDetailItem icon={FiDollarSign} text={event.price} />
+                            <EventDetailItem icon={FiClock} text={event.timings} />
+                        </div>
+                        {/* Description no longer needs a max-height here */}
+                        <p className="text-sm leading-normal text-neutral-300">{event.description}</p>
+                    </div>
+                </div>
+                
+                {/* ✅ Sticky Footer/Button Area */}
+                <div className="flex-shrink-0 p-6 pt-4 border-t border-gray-700/50">
+                    <DetailsRegisterButton href={event.registrationUrl} />
+                </div>
+            </div>
+            {/* --- Close Button (Unchanged) --- */}
+            <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
     );
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in overflow-y-auto" onClick={onClose}>
-      <ImageClipPathSVG />
-
-      {/* DESKTOP LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in my-8">
-        <div className="relative w-full aspect-[1269/715]">
-          <EventDetailsBorderSVG />
-          
-          <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
-            <div className="flex flex-col space-y-8">
-              <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
-              
-              <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
-                <EventDetailItem icon={FiCalendar} text={event.date} isDesktop />
-                <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop />
-                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop />
-                <EventDetailItem icon={FiClock} text={event.timings} isDesktop />
-              </div>
-              
-              <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
-                {event.description}
-              </p>
-            </div>
-            
-            <div className="mt-6">
-              <DetailsRegisterButton href={event.registrationUrl} />
-            </div>
-          </div>
-          
-          {/* UPDATED: Added background color to the container for better letterboxing */}
-          <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full bg-black/30">
-            {/* UPDATED: Changed object-cover to object-contain to show the full poster */}
-            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-contain" style={{ clipPath: 'url(#image-clip)' }} />
-            <ImageClipShapeSVG />
-          </div>
-        </div>
-      </div>
-
-      {/* MOBILE LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#0073FF] rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200 my-8">
-        {/* UPDATED: Changed aspect ratio and object-fit for the poster */}
-        <img 
-            src={event.imageUrl} 
-            alt={event.title} 
-            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
-        />
-        
-        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          <EventDetailItem icon={FiCalendar} text={event.date} />
-          <EventDetailItem icon={FiMapPin} text={event.venue} />
-          <EventDetailItem icon={FiDollarSign} text={event.price} />
-          <EventDetailItem icon={FiClock} text={event.timings} />
-        </div>
-        
-        <div className="flex-grow overflow-y-auto max-h-[150px] custom-scrollbar pr-2">
-          <p className="text-sm leading-normal">{event.description}</p>
-        </div>
-        
-        <div className="mt-4 flex-shrink-0">
-          <DetailsRegisterButton href={event.registrationUrl} />
-        </div>
-      </div>
-
-      {/* Close Button */}
-      <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-  );
 };
-
 // --- MAIN PAGE ---
 
 const NonTech = () => {
