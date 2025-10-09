@@ -10,7 +10,7 @@ export const allEvents = [
         description: "A fun-filled technical event where students build logic gates under a blindfold challenge, testing teamwork, accuracy, and problem-solving.",
         date: "Oct 15, 2025",
         venue: "LCD LAB",
-        timings: null,
+        timings: "2PM",
         price: null,
         imageUrl: "/TechEvents/BLIND BUILD.jpg",
         registrationUrl: null
