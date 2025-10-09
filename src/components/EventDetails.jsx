@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import allEvents from "../data/EventData"; 
 // NEW: Import icons from the Feather Icons library
-import { FiCalendar, FiMapPin } from 'react-icons/fi';
+import { FiCalendar, FiMapPin, FiDollarSign, FiClock } from 'react-icons/fi';
 // --- SVG COMPONENTS ---
 
 
@@ -128,13 +128,19 @@ const ViewDetailsButton = ({ onClick }) => (
 // --- EVENT CARD ---
 
 const EventCard = ({ event, onViewDetailsClick }) => (
+  // ✨ "w-11/12" makes the card narrower, "mx-auto" centers it.
   <div className="relative w-11/12 mx-auto aspect-[464/636]">
     <CardShapeSVG />
+
     <div className="absolute inset-0 p-6 flex flex-col">
-      <div className="flex-grow space-y-2 mb-2">
-        <h3 className="text-xl font-['KH Interference'] text-white leading-tight">{event.title}</h3>
-        <p className="text-neutral-400 text-xs leading-snug">{event.description.substring(0, 150)}...</p>
+      <div className="h-[80vh] mt-3 mb-2 w-full rounded-2xl overflow-hidden">
+        <img
+       src={event.imageUrl || placeholderImage}
+          alt={event.title}
+          className="w-full h-full object-cover rounded"
+         />
       </div>
+
       <div className="flex-shrink-0 mt-auto">
         <ViewDetailsButton onClick={() => onViewDetailsClick(event)} />
       </div>
@@ -146,12 +152,18 @@ const EventCard = ({ event, onViewDetailsClick }) => (
 
 const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
   <div className="flex justify-center -mt-5 md:-mt-2">
-    <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-[300px] md:max-w-md bg-black/30">
+    {/* Increased max-width to give the larger text more space */}
+    <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-sm md:max-w-lg bg-black/30">
+      {/* This slider's calculations don't need to change as they are relative to the parent */}
       <div className={`absolute top-1/2 -translate-y-1/2 left-1.5 w-[calc(50%-6px)] h-[calc(100%-12px)] bg-red-600 rounded-full transition-transform duration-300 ease-out ${activeFilter === 'non-technical' ? 'translate-x-full' : 'translate-x-0'}`}></div>
-      <button onClick={() => setActiveFilter("technical")} className="cursor-pointer relative flex-1 py-2 text-white text-xs md:text-sm uppercase font-['KH Interference'] tracking-wider text-center">
+      
+      {/* Increased padding (py-3) and font size (text-sm/md:text-base) */}
+      <button onClick={() => setActiveFilter("technical")} className="cursor-pointer relative flex-1 py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center">
         Technical Events
       </button>
-      <button onClick={() => setActiveFilter("non-technical")} className="cursor-pointer relative flex-1 py-2 text-white text-xs md:text-sm uppercase font-['KH Interference'] tracking-wider text-center">
+      
+      {/* Increased padding (py-3) and font size (text-sm/md:text-base) */}
+      <button onClick={() => setActiveFilter("non-technical")} className="cursor-pointer relative flex-1 py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center">
         Non-Technical Events
       </button>
     </div>
@@ -159,94 +171,89 @@ const FilterNavigation = ({ activeFilter, setActiveFilter }) => (
 );
 
 // --- EVENT MODAL ---
-
 const EventModal = ({ event, onClose }) => {
   if (!event) return null;
+  
   const handleModalContentClick = (e) => e.stopPropagation();
+  
+  const EventDetailItem = ({ icon: Icon, text, isDesktop = false }) => {
+    if (!text) return null;
+    return (
+      <div className="flex items-center">
+        <Icon className={`text-[#F64040] flex-shrink-0 ${isDesktop ? 'h-6 w-6 mr-4' : 'h-5 w-5 mr-3'}`} />
+        <span className={isDesktop ? 'text-base' : 'text-sm'}>{text}</span>
+      </div>
+    );
+  };
 
   return (
-    // The outer div now has the animation class to ensure the background fades in smoothly
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in overflow-y-auto" onClick={onClose}>
       <ImageClipPathSVG />
 
       {/* DESKTOP LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in">
+      <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in my-8">
         <div className="relative w-full aspect-[1269/715]">
           <EventDetailsBorderSVG />
           
-          <div className="absolute left-8 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-8">
-            <div className="space-y-6">
-              <h2 className="text-3xl lg:text-4xl uppercase tracking-wider text-white">{event.title}</h2>
+          <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
+            <div className="flex flex-col space-y-8">
+              <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
               
-              <div className="space-y-3 text-sm text-neutral-300">
-                {event.date && (
-                  <div className="flex items-center space-x-3">
-                    {/* MODIFIED: Replaced emoji with FiCalendar icon */}
-                    <FiCalendar className="text-[#F64040] h-4 w-4 flex-shrink-0" />
-                    <span>{event.date}</span>
-                  </div>
-                )}
-                {event.venue && (
-                  <div className="flex items-center space-x-3">
-                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiMapPin className="text-[#F64040] h-4 w-4 flex-shrink-0" />
-                    <span>{event.venue}</span>
-                  </div>
-                )}
+              <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
+                <EventDetailItem icon={FiCalendar} text={event.date} isDesktop />
+                <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop />
+                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop />
+                <EventDetailItem icon={FiClock} text={event.timings} isDesktop />
               </div>
               
-              <p className="text-neutral-300 text-sm leading-relaxed max-h-[280px] overflow-y-auto custom-scrollbar pr-2">
+              <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
                 {event.description}
               </p>
             </div>
             
-            <div className="mt-8">
+            <div className="mt-6">
               <DetailsRegisterButton href={event.registrationUrl} />
             </div>
           </div>
           
-          <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full">
-            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" style={{ clipPath: 'url(#image-clip)' }} />
+          {/* UPDATED: Added background color to the container for better letterboxing */}
+          <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full bg-black/30">
+            {/* UPDATED: Changed object-cover to object-contain to show the full poster */}
+            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-contain" style={{ clipPath: 'url(#image-clip)' }} />
             <ImageClipShapeSVG />
           </div>
         </div>
       </div>
 
       {/* MOBILE LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#F64040] rounded-2xl animate-scale-in flex flex-col p-6 space-y-4">
-        <img src={event.imageUrl} alt={event.title} className="w-full h-auto aspect-video object-cover rounded-lg" />
-        <div className="flex-grow flex flex-col justify-between overflow-hidden">
-          <div className="space-y-3 overflow-y-auto custom-scrollbar pr-2">
-            <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
-            
-            {(event.date || event.venue) && (
-              <div className="space-y-2 text-xs text-neutral-300">
-                {event.date && (
-                  <div className="flex items-center space-x-2">
-                    {/* MODIFIED: Replaced emoji with FiCalendar icon */}
-                    <FiCalendar className="text-[#F64040] h-3 w-3 flex-shrink-0" />
-                    <span>{event.date}</span>
-                  </div>
-                )}
-                {event.venue && (
-                  <div className="flex items-center space-x-2">
-                    {/* MODIFIED: Replaced emoji with FiMapPin icon */}
-                    <FiMapPin className="text-[#F64040] h-3 w-3 flex-shrink-0" />
-                    <span>{event.venue}</span>
-                  </div>
-                )}
-              </div>
-            )}
-            
-            <p className="text-neutral-300 text-sm leading-normal">{event.description}</p>
-          </div>
-          <div className="mt-6 flex-shrink-0">
-            <DetailsRegisterButton href={event.registrationUrl} />
-          </div>
+      <div onClick={handleModalContentClick} className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 border-[#F64040] rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200 my-8">
+        {/* UPDATED: Changed aspect ratio and object-fit for the poster */}
+        <img 
+            src={event.imageUrl} 
+            alt={event.title} 
+            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
+        />
+        
+        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
+
+        <div className="grid grid-cols-2 gap-4">
+          <EventDetailItem icon={FiCalendar} text={event.date} />
+          <EventDetailItem icon={FiMapPin} text={event.venue} />
+          <EventDetailItem icon={FiDollarSign} text={event.price} />
+          <EventDetailItem icon={FiClock} text={event.timings} />
+        </div>
+        
+        <div className="flex-grow overflow-y-auto max-h-[150px] custom-scrollbar pr-2">
+          <p className="text-sm leading-normal">{event.description}</p>
+        </div>
+        
+        <div className="mt-4 flex-shrink-0">
+          <DetailsRegisterButton href={event.registrationUrl} />
         </div>
       </div>
 
-      <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 md:top-6 md:right-6 text-neutral-400 hover:text-white transition-colors z-50">
+      {/* Close Button */}
+      <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -254,7 +261,6 @@ const EventModal = ({ event, onClose }) => {
     </div>
   );
 };
-
 
 // --- MAIN PAGE ---
 
@@ -267,91 +273,58 @@ const EventsPage = () => {
   }, [activeFilter]);
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col">
-      {/* <AnimatedBackground />
-      <div className="hidden md:block">
-        <TargetCursor
-          spinDuration={2}
-          hideDefaultCursor={true}
-        />
-      </div> */}
-
-      {/* Main content area now expands to fill available space */}
-      <div className="relative z-10 flex flex-col flex-grow">
-        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
-          
-          {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
-          <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
-            <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
-              Coming Soon
-            </h1>
-          </div>
-
-          {/* Original routes are kept commented out as they were in your file */}
-          {/* <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="eventdetails" element={<EventDetails />} />
-            </Route>
-          </Routes> */}
-        </Suspense>
-      </div>
-
-      {/* NEW: Added a footer for developer credits */}
-      <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
-        <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
-      </footer>
-    </div>
-//     <>
-//       <style>{`
-//         @import url('https://fonts.cdnfonts.com/css/kh-interference');
+    <>
+      <style>{`
+        @import url('https://fonts.cdnfonts.com/css/kh-interference');
         
-//         .font-kh-interference { font-family: 'KH Interference', sans-serif; }
-//         .dot-grid { background-image: radial-gradient(circle at 1px 1px, rgba(200, 200, 200, 0.2) 1px, transparent 0); background-size: 20px 20px; }
-//         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-//         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-//         .custom-scrollbar::-webkit-scrollbar-thumb { background: #F64040; border-radius: 2px; }
-//         .no-scrollbar::-webkit-scrollbar { display: none; }
-//         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-//         @keyframes scale-in {
-//           from { transform: scale(0.9) translateY(20px); opacity: 0; }
-//           to { transform: scale(1) translateY(0); opacity: 1; }
-//         }
-//         .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-//       `}</style>
+        .font-kh-interference { font-family: 'KH Interference', sans-serif; }
+        .dot-grid { background-image: radial-gradient(circle at 1px 1px, rgba(200, 200, 200, 0.2) 1px, transparent 0); background-size: 20px 20px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #F64040; border-radius: 2px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes scale-in {
+          from { transform: scale(0.9) translateY(20px); opacity: 0; }
+          to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+      `}</style>
 
-//       <main className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black">
-//     <div className="relative w-full h-full max-w-screen-2xl">
-//         <div className="absolute inset-0 z-0 pointer-events-none">
-//             <div className="hidden md:block w-full h-full">
-//                 <DesktopPageBorderSVG />
-//             </div>
-//             <div className="block md:hidden w-full h-full">
-//                 <MobilePageBorderSVG />
-//             </div>
-//         </div>
+      <main className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black">
+    <div className="relative w-full h-full max-w-screen-2xl">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="hidden md:block w-full h-full">
+                <DesktopPageBorderSVG />
+            </div>
+            <div className="block md:hidden w-full h-full">
+                <MobilePageBorderSVG />
+            </div>
+        </div>
 
-//         {/* All content below will now inherit the correct font */}
-//         <div className="absolute inset-0 z-10 flex flex-col pt-0">
-//             <div className="flex-shrink-0 sticky top-0 bg-transparent z-20 pt-8 md:pt-0">
-//                 <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-//             </div>
-            
-//             <div className="flex-grow overflow-y-scroll no-scrollbar pt-12 md:pt-16 pb-12">
-//                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
-//                     {filteredEvents.map(event => (
-//                         <EventCard key={event.id} event={event} onViewDetailsClick={setSelectedEvent} />
-//                     ))}
-//                 </div>
-//             </div>
+        {/* All content below will now inherit the correct font */}
+        <div className="absolute inset-0 z-10 flex flex-col pt-0">
+    {/* 1. Added solid background and bottom padding here */}
+    <div className="flex-shrink-0 sticky top-0  z-20 pt-8 md:pt-0 pb-6">
+        <FilterNavigation activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+    </div>
 
-//             <div className="flex-shrink-0 h-12 md:h-24"></div>
-//         </div>
-//     </div>
-// </main>
+    {/* 2. Removed top padding from here */}
+    <div className="flex-grow overflow-y-scroll no-scrollbar pb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
+            {filteredEvents.map(event => (
+                <EventCard key={event.id} event={event} onViewDetailsClick={setSelectedEvent} />
+            ))}
+        </div>
+    </div>
 
-//       <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-//     </>
+    <div className="flex-shrink-0 h-12 md:h-24"></div>
+</div>
+    </div>
+</main>
+
+      <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+    </>
   );
 };
 
