@@ -63,6 +63,54 @@ export const preEvents = [
         imageUrl: "/TechEvents/CIRCUIT.jpg",
         registrationUrl: "https://konfhub.com/circuit-trails-arduino-hackathon-sprint"
     },
+    {
+        id: 6,
+        title: "Code Quest",
+        category: "preevents",
+        description: "A unique campus-wide race where teams use custom Arduino circuits to decode Morse code clues at fixed checkpoints. It's a high-energy challenge that merges electronics, cryptography, and teamwork.",
+        date: "Oct 15, 2025",
+        venue: "Classroom-LH 5",
+        timings: "8.30AM",
+        price: "150 per team",
+        imageUrl: "TechEvents/AGENTS 101.jpg",
+        registrationUrl: "https://konfhub.com/code-quest-e82ed0f0"
+    },
+    {
+        id: 7,
+        title: "Agents 101",
+        category: "preevents",
+        description: "Hands-on workshop introducing students to agentic AI and machine learning, guiding them from beginner to intermediate level to build their first showcase-worthy project.",
+        date: "Oct 15, 2025",
+        venue: "Zuse Lab",
+        timings: "9.00AM",
+        price: "100 per person",
+        imageUrl: "TechEvents/CodeQuest.jpg",
+        registrationUrl: "https://konfhub.com/agents-101-12f9e488"
+    },
+    {
+        id: 8,
+        title: "Cloud & Careers: Navigating the Tech Landscape",
+        category: "preevents",
+        description: "A technical session led by industry experts, guiding students through emerging opportunities in cloud technologies and modern tech careers",
+        date: "Oct 15, 2025",
+        venue: "MULTIMEDIA HALL",
+        timings: "8.30AM",
+        price: "50 per person",
+        imageUrl: "/TechEvents/Cloud & Careers.jpg",
+        registrationUrl: "https://konfhub.com/cloud-careers-navigating-the-tech-landscape"
+    },
+    {
+        id: 9,
+        title: "Vibe night",
+        category: "preevents",
+        description: "VibeNight is a 12-hour coding hackathon where creativity, caffeine, and code collide",
+        date: "Oct 14, 2025",
+        venue: "Gallery Hall",
+        timings: "5.30PM",
+        price: "249 per person",
+        imageUrl: "/TechEvents/Vibe Night.jpg",
+        registrationUrl: "https://konfhub.com/vibe-night-d5152552"
+    },
        
 ];
 

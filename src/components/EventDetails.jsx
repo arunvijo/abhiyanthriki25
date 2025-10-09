@@ -151,21 +151,35 @@ const EventCard = ({ event, onViewDetailsClick,color = "#F64040"  }) => (
 // --- FILTER NAVIGATION ---
 
 const FilterNavigation = ({ activeFilter, setActiveFilter, color = "#F64040" }) => (
-  <div className="flex justify-center -mt-5 md:-mt-2">
+  <div className="flex justify-center -mt-5 md:-mt-2 px-4">
     <div className="relative flex items-center justify-center p-1.5 border-2 border-white rounded-full mx-auto w-full max-w-sm md:max-w-lg bg-black/30">
       
-      {/* This is the moving slider div that changes color */}
+      {/* This is the moving slider div that uses the dynamic color */}
       <div 
-        className={`absolute top-1/2 -translate-y-1/2 left-1.5 w-[calc(50%-6px)] h-[calc(100%-12px)] rounded-full transition-transform duration-300 ease-out ${activeFilter === 'non-technical' ? 'translate-x-full' : 'translate-x-0'}`}
-        style={{ backgroundColor: color }} // Use inline style for the dynamic color
+        className={`
+          absolute top-1/2 -translate-y-1/2 left-1.5 w-[calc(50%-6px)] h-[calc(100%-12px)] rounded-full 
+          transition-transform duration-300 ease-out 
+          ${activeFilter === 'non-technical' ? 'translate-x-full' : 'translate-x-0'}
+        `}
+        style={{ backgroundColor: color }}
       ></div>
       
-      <button onClick={() => setActiveFilter("technical")} className="cursor-pointer relative flex-1 py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center">
-        Technical Events
+      {/* Technical Button with responsive text */}
+      <button 
+        onClick={() => setActiveFilter("technical")} 
+        className="cursor-pointer relative flex-1 py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center transition-opacity"
+      >
+        <span className="md:hidden">Technical</span>
+        <span className="hidden md:inline">Technical Events</span>
       </button>
       
-      <button onClick={() => setActiveFilter("non-technical")} className="cursor-pointer relative flex-1 py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center">
-        Non-Technical Events
+      {/* Non-Technical Button with responsive text */}
+      <button 
+        onClick={() => setActiveFilter("non-technical")} 
+        className="cursor-pointer relative flex-1 py-3 text-white text-sm md:text-base uppercase font-['KH Interference'] tracking-wider text-center transition-opacity"
+      >
+        <span className="md:hidden">Non-Tech</span>
+        <span className="hidden md:inline">Non-Technical Events</span>
       </button>
     </div>
   </div>
@@ -173,107 +187,97 @@ const FilterNavigation = ({ activeFilter, setActiveFilter, color = "#F64040" }) 
 
 // --- EVENT MODAL ---
 const EventModal = ({ event, onClose, color = "#F64040" }) => {
-  if (!event) return null;
-  
-  const handleModalContentClick = (e) => e.stopPropagation();
-  
-  // 1. UPDATE: Accept the 'color' prop here
-  const EventDetailItem = ({ icon: Icon, text, isDesktop = false, color }) => {
-    if (!text) return null;
+    if (!event) return null;
+
+    const handleModalContentClick = (e) => e.stopPropagation();
+
+    const EventDetailItem = ({ icon: Icon, text, isDesktop = false, color }) => {
+        if (!text) return null;
+        return (
+            <div className="flex items-center">
+                <Icon
+                    className={`flex-shrink-0 ${isDesktop ? 'h-6 w-6 mr-4' : 'h-5 w-5 mr-3'}`}
+                    style={{ color: color }}
+                />
+                <span className={isDesktop ? 'text-base' : 'text-sm'}>{text}</span>
+            </div>
+        );
+    };
+
     return (
-      <div className="flex items-center">
-        {/* 2. UPDATE: Use an inline style for the dynamic icon color */}
-        <Icon 
-          className={`flex-shrink-0 ${isDesktop ? 'h-6 w-6 mr-4' : 'h-5 w-5 mr-3'}`} 
-          style={{ color: color }}
-        />
-        <span className={isDesktop ? 'text-base' : 'text-sm'}>{text}</span>
-      </div>
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in overflow-y-auto" onClick={onClose}>
+            {/* --- SVGs for Desktop --- */}
+            <div className='hidden md:block'>
+                <ImageClipPathSVG />
+            </div>
+
+            {/* --- DESKTOP LAYOUT (Unchanged) --- */}
+            <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in my-8">
+                <div className="relative w-full aspect-[1269/715]">
+                    <EventDetailsBorderSVG color={color} />
+                    <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
+                        <div className="flex flex-col space-y-8">
+                            <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
+                            <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
+                                <EventDetailItem icon={FiCalendar} text={event.date} isDesktop color={color} />
+                                <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop color={color} />
+                                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop color={color} />
+                                <EventDetailItem icon={FiClock} text={event.timings} isDesktop color={color} />
+                            </div>
+                            <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
+                                {event.description}
+                            </p>
+                        </div>
+                        <div className="mt-6">
+                            <DetailsRegisterButton href={event.registrationUrl} color={color} />
+                        </div>
+                    </div>
+                    <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full bg-black/30">
+                        <img src={event.imageUrl} alt={event.title} className="w-full h-full object-contain" style={{ clipPath: 'url(#image-clip)' }} />
+                        <ImageClipShapeSVG color={color} />
+                    </div>
+                </div>
+            </div>
+
+            {/* --- ✅ IMPROVED MOBILE LAYOUT --- */}
+            <div
+                onClick={handleModalContentClick}
+                className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 rounded-2xl animate-scale-in flex flex-col my-8 max-h-[90vh]"
+                style={{ borderColor: color }}
+            >
+                {/* Scrollable Content Area */}
+                <div className="flex-grow overflow-y-auto custom-scrollbar p-6">
+                    <div className="space-y-5">
+                        <img
+                            src={event.imageUrl}
+                            alt={event.title}
+                            className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30"
+                        />
+                        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
+                        <div className="grid grid-cols-2 gap-4 text-neutral-300">
+                            <EventDetailItem icon={FiCalendar} text={event.date} color={color} />
+                            <EventDetailItem icon={FiMapPin} text={event.venue} color={color} />
+                            <EventDetailItem icon={FiDollarSign} text={event.price} color={color} />
+                            <EventDetailItem icon={FiClock} text={event.timings} color={color} />
+                        </div>
+                        <p className="text-sm leading-normal text-neutral-300">{event.description}</p>
+                    </div>
+                </div>
+                
+                {/* Sticky Footer/Button Area */}
+                <div className="flex-shrink-0 p-6 pt-4 border-t" style={{ borderColor: 'rgba(128, 128, 128, 0.2)'}}>
+                    <DetailsRegisterButton href={event.registrationUrl} color={color} />
+                </div>
+            </div>
+
+            {/* --- Close Button (Unchanged) --- */}
+            <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
     );
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 animate-fade-in overflow-y-auto" onClick={onClose}>
-      <ImageClipPathSVG />
-
-      {/* DESKTOP LAYOUT */}
-      <div onClick={handleModalContentClick} className="relative w-full max-w-6xl mx-auto hidden md:flex items-center justify-center animate-scale-in my-8">
-        <div className="relative w-full aspect-[1269/715]">
-          {/* 3. UPDATE: Pass 'color' prop down */}
-          <EventDetailsBorderSVG color={color} />
-          
-          <div className="absolute left-12 top-16 bottom-16 w-[55%] flex flex-col justify-between text-white font-['KH Interference'] pr-10">
-            <div className="flex flex-col space-y-8">
-              <h2 className="text-4xl lg:text-5xl uppercase tracking-wider text-white">{event.title}</h2>
-              
-              <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
-                {/* 4. UPDATE: Pass 'color' prop down to each item */}
-                <EventDetailItem icon={FiCalendar} text={event.date} isDesktop color={color} />
-                <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop color={color} />
-                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop color={color} />
-                <EventDetailItem icon={FiClock} text={event.timings} isDesktop color={color} />
-              </div>
-              
-              <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
-                {event.description}
-              </p>
-            </div>
-            
-            <div className="mt-6">
-              {/* 5. UPDATE: Pass 'color' prop down */}
-              <DetailsRegisterButton href={event.registrationUrl} color={color} />
-            </div>
-          </div>
-          
-          <div className="absolute right-[-5px] top-[3px] bottom-0 w-[38%] h-full bg-black/30">
-            <img src={event.imageUrl} alt={event.title} className="w-full h-full object-contain" style={{ clipPath: 'url(#image-clip)' }} />
-            {/* 6. UPDATE: Pass 'color' prop down */}
-            <ImageClipShapeSVG color={color} />
-          </div>
-        </div>
-      </div>
-
-      {/* MOBILE LAYOUT */}
-      <div 
-        onClick={handleModalContentClick} 
-        className="relative w-full max-w-sm md:hidden bg-[#1C1C1C] border-2 rounded-2xl animate-scale-in flex flex-col p-6 space-y-5 text-neutral-200 my-8"
-        // 7. UPDATE: Use inline style for the dynamic border color
-        style={{ borderColor: color }}
-      >
-        <img 
-          src={event.imageUrl} 
-          alt={event.title} 
-          className="w-full h-auto aspect-[4/5] object-contain rounded-lg bg-black/30" 
-        />
-        
-        <h2 className="text-2xl uppercase tracking-wider text-white">{event.title}</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          {/* 8. UPDATE: Pass 'color' prop down to each item */}
-          <EventDetailItem icon={FiCalendar} text={event.date} color={color} />
-          <EventDetailItem icon={FiMapPin} text={event.venue} color={color} />
-          <EventDetailItem icon={FiDollarSign} text={event.price} color={color} />
-          <EventDetailItem icon={FiClock} text={event.timings} color={color} />
-        </div>
-        
-        <div className="flex-grow overflow-y-auto max-h-[150px] custom-scrollbar pr-2">
-          <p className="text-sm leading-normal">{event.description}</p>
-        </div>
-        
-        <div className="mt-4 flex-shrink-0">
-          {/* 9. UPDATE: Pass 'color' prop down */}
-          <DetailsRegisterButton href={event.registrationUrl} color={color} />
-        </div>
-      </div>
-
-      {/* Close Button */}
-      <button onClick={onClose} className="cursor-pointer absolute top-4 right-4 text-neutral-400 hover:text-white transition-colors z-[51]">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-  );
 };
 
 // --- MAIN PAGE ---
@@ -291,97 +295,62 @@ const EventsPage = () => {
   }, [activeFilter]);
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col">
-      {/* <AnimatedBackground />
-      <div className="hidden md:block">
-        <TargetCursor
-          spinDuration={2}
-          hideDefaultCursor={true}
-        />
-      </div> */}
+    <>
+      <style>{`
+        /* ... existing styles ... */
+        
+        /* NEW: Custom scrollbar color variable */
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--active-color, #F64040); border-radius: 2px; }
+      `}</style>
 
-      {/* Main content area now expands to fill available space */}
-      <div className="relative z-10 flex flex-col flex-grow">
-        <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center text-white">Loading...</div>}>
-          
-          {/* MODIFIED: Replaced inline styles with responsive Tailwind classes for a better look */}
-          <div className="flex flex-col flex-grow justify-center items-center text-center p-4">
-            <h1 className="text-[#F64040] font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl animate-pulse">
-              Coming Soon
-            </h1>
+      {/* NEW: Pass activeColor as a CSS variable to the main element */}
+      <main 
+        className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black"
+        style={{ '--active-color': activeColor }}
+      >
+        <div className="relative w-full h-full max-w-screen-2xl">
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="hidden md:block w-full h-full">
+              {/* Pass the color prop to your SVG components */}
+              <DesktopPageBorderSVG color={activeColor} />
+            </div>
+            <div className="block md:hidden w-full h-full">
+              <MobilePageBorderSVG color={activeColor} />
+            </div>
           </div>
 
-          {/* Original routes are kept commented out as they were in your file */}
-          {/* <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="eventdetails" element={<EventDetails />} />
-            </Route>
-          </Routes> */}
-        </Suspense>
-      </div>
+          <div className="absolute inset-0 z-10 flex flex-col pt-0">
+            <div className="flex-shrink-0 sticky top-0 z-20 pt-8 md:pt-0 pb-6">
+  <FilterNavigation 
+    activeFilter={activeFilter} 
+    setActiveFilter={setActiveFilter} 
+    color={activeColor} 
+  />
+</div>
 
-      {/* NEW: Added a footer for developer credits */}
-      <footer className="relative z-10 w-full text-center p-4 text-neutral-500 text-sm">
-        <p>Developed with ❤️ by Arun Vijo, Abhishikth & Neehar</p>
-      </footer>
-    </div>
-//     <>
-//       <style>{`
-//         /* ... existing styles ... */
-        
-//         /* NEW: Custom scrollbar color variable */
-//         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--active-color, #F64040); border-radius: 2px; }
-//       `}</style>
+            <div className="flex-grow overflow-y-scroll no-scrollbar pb-20">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
+                {filteredEvents.map(event => (
+                  <EventCard 
+                    key={event.id} 
+                    event={event} 
+                    onViewDetailsClick={setSelectedEvent} 
+                    color={activeColor} 
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="flex-shrink-0 h-12 md:h-24"></div>
+          </div>
+        </div>
+      </main>
 
-//       {/* NEW: Pass activeColor as a CSS variable to the main element */}
-//       <main 
-//         className="h-screen w-screen relative overflow-hidden dot-grid font-['KH Interference'] flex items-center justify-center p-4 sm:p-9 bg-black"
-//         style={{ '--active-color': activeColor }}
-//       >
-//         <div className="relative w-full h-full max-w-screen-2xl">
-//           <div className="absolute inset-0 z-0 pointer-events-none">
-//             <div className="hidden md:block w-full h-full">
-//               {/* Pass the color prop to your SVG components */}
-//               <DesktopPageBorderSVG color={activeColor} />
-//             </div>
-//             <div className="block md:hidden w-full h-full">
-//               <MobilePageBorderSVG color={activeColor} />
-//             </div>
-//           </div>
-
-//           <div className="absolute inset-0 z-10 flex flex-col pt-0">
-//             <div className="flex-shrink-0 sticky top-0 z-20 pt-8 md:pt-0 pb-6">
-//   <FilterNavigation 
-//     activeFilter={activeFilter} 
-//     setActiveFilter={setActiveFilter} 
-//     color={activeColor} 
-//   />
-// </div>
-
-//             <div className="flex-grow overflow-y-scroll no-scrollbar pb-20">
-//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 px-6 md:px-12 lg:px-20">
-//                 {filteredEvents.map(event => (
-//                   <EventCard 
-//                     key={event.id} 
-//                     event={event} 
-//                     onViewDetailsClick={setSelectedEvent} 
-//                     color={activeColor} 
-//                   />
-//                 ))}
-//               </div>
-//             </div>
-//             <div className="flex-shrink-0 h-12 md:h-24"></div>
-//           </div>
-//         </div>
-//       </main>
-
-//       <EventModal 
-//         event={selectedEvent} 
-//         onClose={() => setSelectedEvent(null)} 
-//         color={activeColor} 
-//       />
-//     </>
+      <EventModal 
+        event={selectedEvent} 
+        onClose={() => setSelectedEvent(null)} 
+        color={activeColor} 
+      />
+    </>
   );
 };
 
