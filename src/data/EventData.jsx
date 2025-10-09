@@ -4,100 +4,112 @@ import genericImage from "/keyboardwire.png";
 export const allEvents = [
     // --- Technical Events ---
     {
-        id: 4,
+        id: 1,
+        title: "OverClocked",
+        category: "technical",
+        description: "OverClocked is a 24-hour Capture the Flag challenge where students battle through puzzles in cybersecurity, coding, and problem-solving.",
+        date: "Oct 14th 2025",
+        venue: "New Canteen",
+        timings: "5:30PM",
+        price: "449 per person",
+        imageUrl: "/TechEvents/Overclocked.jpg",
+        registrationUrl: "https://konfhub.com/overclocked-e6b06481"
+    },
+    {
+        id: 2,
+        title: "Roborazz - Line Edition",
+        category: "technical",
+        description: "Roborazz Line Edition is a robotics challenge where teams design and program autonomous robots to race along a black-line track with speed and precision.",
+        date: "Oct 15, 2025",
+        venue: "Pareeksha Bhavan-5",
+        timings: "8:30PM",
+        price: "FREE ENTRY",
+        imageUrl: "/TechEvents/ROBORAZZ.jpg",
+        registrationUrl: "https://konfhub.com/roborazz-line-edition-2dc4ecae"
+    },
+    {
+        id: 3,
         title: "Blind Build 2.0",
         category: "technical",
-        description: "A fun-filled technical event where students build logic gates under a blindfold challenge, testing teamwork, accuracy, and problem-solving.",
+        description: "A fun-filled technical event where students build logic gates under a blindfold challenge, testing teamwork, accuracy, and problem-solving",
         date: "Oct 15, 2025",
         venue: "LCD LAB",
         timings: "2PM",
-        price: null,
+        price: "150 per team",
         imageUrl: "/TechEvents/BLIND BUILD.jpg",
-        registrationUrl: null
+        registrationUrl: "https://konfhub.com/blind-build-20"
+    },
+    {
+        id: 4,
+        title: "Promptify me!",
+        category: "technical",
+        description: "An essential training and competition focused on mastering the art of Prompt Engineering to maximize output and effectiveness from generative AI models",
+        date: "Oct 15, 2025",
+        venue: "ARC Lab",
+        timings: "8:30AM",
+        price: "65 per person",
+        imageUrl: "/TechEvents/Promptify Me.jpg",
+        registrationUrl: "https://konfhub.com/promptify-me"
     },
     {
         id: 5,
-        title: "OverClocked",
+        title: "Circuit Trails- Arduino Hackathon",
         category: "technical",
-        description: "Chakravyuham is a 24-hour Capture the Flag challenge where students battle through puzzles in cybersecurity, coding, and problem-solving.",
-        date: "Oct 14-15, 2025",
-        venue: "New Canteen",
-        timings: null,
-        price: null,
-        imageUrl: genericImage,
-        registrationUrl: null
+        description: "A Squid Game style, timed sprint challenging teams to rapidly code and demonstrate mini-Arduino projects (e.g., sensor tasks) sequentially.",
+        date: "Oct 15, 2025",
+        venue: "Virtual Instrumentation Lab",
+        timings: "8.30AM",
+        price: "150 per team",
+        imageUrl: "/TechEvents/CIRCUIT.jpg",
+        registrationUrl: "https://konfhub.com/circuit-trails-arduino-hackathon-sprint"
     },
     {
         id: 6,
-        title: "Ctrl Alt Roast",
+        title: "Code Quest",
         category: "technical",
-        description: "A light-hearted tech roast where participants debate and roast technology, trends, and concepts.",
+        description: "A unique campus-wide race where teams use custom Arduino circuits to decode Morse code clues at fixed checkpoints. It's a high-energy challenge that merges electronics, cryptography, and teamwork.",
         date: "Oct 15, 2025",
-        venue: "Classroom-LH 1",
-        timings: null,
-        price: null,
-        imageUrl: "/TechEvents/CTRL.jpg",
-        registrationUrl: null
+        venue: "Classroom-LH 5",
+        timings: "8.30AM",
+        price: "150 per team",
+        imageUrl: "/TechEvents/AGENTS 101.jpg", // Corrected Path
+        registrationUrl: "https://konfhub.com/code-quest-e82ed0f0"
     },
     {
         id: 7,
-        title: "Roborazz - Line Edition",
+        title: "Agents 101",
         category: "technical",
-        description: "A robotics challenge where teams design and program autonomous robots to race along a black-line track with speed and precision.",
+        description: "Hands-on workshop introducing students to agentic AI and machine learning, guiding them from beginner to intermediate level to build their first showcase-worthy project.",
         date: "Oct 15, 2025",
-        venue: "Pareeksha Bhavan-5",
-        timings: null,
-        price: null,
-        imageUrl: "/TechEvents/ROBORAZZ.jpg",
-        registrationUrl: null
+        venue: "Zuse Lab",
+        timings: "9.00AM",
+        price: "100 per person",
+        imageUrl: "/TechEvents/CodeQuest.jpg", // Corrected Path
+        registrationUrl: "https://konfhub.com/agents-101-12f9e488"
     },
     {
         id: 8,
-        title: "Arduino Arcade Bash 2.0",
+        title: "Cloud & Careers: Navigating the Tech Landscape",
         category: "technical",
-        description: "An exciting workshop and competition where students create an \"arcade\" style game using Arduino resources provided.",
+        description: "A technical session led by industry experts, guiding students through emerging opportunities in cloud technologies and modern tech careers",
         date: "Oct 15, 2025",
-        venue: "ARC LAB",
-        timings: null,
-        price: null,
-        imageUrl: "/TechEvents/Arduino.jpg",
-        registrationUrl: null
+        venue: "MULTIMEDIA HALL",
+        timings: "8.30AM",
+        price: "50 per person",
+        imageUrl: "/TechEvents/Cloud & Careers.jpg",
+        registrationUrl: "https://konfhub.com/cloud-careers-navigating-the-tech-landscape"
     },
     {
         id: 9,
-        title: "Circuit Trails – Arduino Hackathon",
-        category: "technical",
-        description: "A timed sprint challenging teams to rapidly code and demonstrate mini-Arduino projects sequentially.",
-        date: "Oct 15, 2025",
-        venue: "Virtual Instrumentation Lab",
-        timings: null,
-        price: null,
-        imageUrl: "/TechEvents/CIRCUIT.jpg",
-        registrationUrl: null
-    },
-    {
-        id: 10,
-        title: "Cloud & Careers: Navigating the Tech Landscape",
-        category: "technical",
-        description: "A session led by industry experts, guiding students through opportunities in cloud technologies and modern tech careers.",
-        date: "Oct 15, 2025",
-        venue: "MULTIMEDIA HALL",
-        timings: null,
-        price: null,
-        imageUrl: "/TechEvents/Cloud & Careers.jpg",
-        registrationUrl: null
-    },
-    {
-        id: 11,
         title: "Vibe night",
         category: "technical",
-        description: "A 12-hour vibe coding hackathon.",
-        date: "Oct 14-15, 2025",
+        description: "VibeNight is a 12-hour coding hackathon where creativity, caffeine, and code collide",
+        date: "Oct 14, 2025",
         venue: "Gallery Hall",
-        timings: null,
-        price: null,
-        imageUrl: genericImage,
-        registrationUrl: null
+        timings: "5.30PM",
+        price: "249 per person",
+        imageUrl: "/TechEvents/Vibe Night.jpg",
+        registrationUrl: "https://konfhub.com/vibe-night-d5152552"
     },
 
     // --- Non-Technical Events ---
@@ -127,7 +139,7 @@ export const allEvents = [
     },
     {
         id: 14,
-        title: "Red Code: Women’s Safety & Health Awareness",
+        title: "Red Code: Women’s Safety",
         category: "non-technical",
         description: "Spreads awareness about women’s health in a creative way, featuring expert talks and a period-pain simulator.",
         date: "Oct 15, 2025",
@@ -148,18 +160,6 @@ export const allEvents = [
         price: "120 per person",
         imageUrl: "/NonTechEvents/Among Us.jpg",
         registrationUrl: "https://konfhub.com/among-us-1951881c"
-    },
-    {
-        id: 17,
-        title: "Agents 101",
-        category: "technical",
-        description: "A hands-on workshop introducing students to agentic AI and machine learning, guiding them to build their first showcase-worthy project.",
-        date: "Oct 15, 2025",
-        venue: "Zuse Lab",
-        timings: null,
-        price: null,
-        imageUrl: "TechEvents/AGENTS 101.jpg",
-        registrationUrl: null
     },
 ];
 

@@ -21,7 +21,7 @@ const Layout = () => {
       </main>
 
       {/* ✅ Navbar is hidden only on the event details page */}
-      {!isEventDetailPage && <Navbar />}
+      <Navbar />
 
       {/* ✅ Footer is now shown ONLY on the homepage */}
       {isHomePage && <FooterSection />}
