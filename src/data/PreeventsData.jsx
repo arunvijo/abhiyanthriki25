@@ -1,4 +1,4 @@
-import image from "/public/keyboardwire.png";
+import image from "/keyboardwire.png";
 
 // --- EVENT DATA ARRAY ---
 // Each event now has a 'registrationUrl' property.

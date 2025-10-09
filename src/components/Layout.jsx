@@ -5,23 +5,26 @@ import FooterSection from './FooterSection';
 
 const Layout = () => {
   const location = useLocation();
+  
+  // Check if the current page is the homepage or the event details page.
+  const isHomePage = location.pathname === '/';
   const isEventDetailPage = location.pathname === '/eventdetails';
-  const isPreEventPage = location.pathname === '/preevents';
-  const isNonTechPage = location.pathname === '/nontech';
-  const isTechPage = location.pathname === '/tech';
 
   return (
     <>
-      {/* ✅ Main content container with bottom padding to prevent overlap */}
-      <main className="min-h-screen pb-24 md:pb-0 overflow-x-hidden">
+      {/* ✅ Main content container.
+        The bottom padding is now applied ONLY on the homepage to prevent 
+        the footer from overlapping content on mobile.
+      */}
+      <main className={`min-h-screen overflow-x-hidden ${isHomePage ? 'pb-24 md:pb-0' : ''}`}>
         <Outlet />
       </main>
 
-      {/* ✅ Navbar is always visible */}
+      {/* ✅ Navbar is hidden only on the event details page */}
       {!isEventDetailPage && <Navbar />}
 
-      {/* ✅ Footer is hidden only on event details page */}
-      {!isEventDetailPage && !isPreEventPage && !isNonTechPage && !isTechPage && <FooterSection />}
+      {/* ✅ Footer is now shown ONLY on the homepage */}
+      {isHomePage && <FooterSection />}
     </>
   );
 };
