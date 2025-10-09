@@ -27,18 +27,18 @@ export const preEvents = [
         imageUrl: "/TechEvents/ROBORAZZ.jpg",
         registrationUrl: "https://konfhub.com/roborazz-line-edition-2dc4ecae" 
     },
-    // {
-    //     id: 3,
-    //     title: "Blind Build 2.0",
-    //     category: "preevents",
-    //     description: "A fun-filled technical event where students build logic gates under a blindfold challenge, testing teamwork, accuracy, and problem-solving",
-    //     date: "Oct 15, 2025",
-    //     venue: "LCD LAB",
-    //     timings: "2PM",
-    //     price: "150 per team",
-    //     imageUrl: "/TechEvents/BLIND BUILD.jpg",
-    //     registrationUrl: "https://konfhub.com/blind-build-20-944ad8d4"
-    // },
+    {
+        id: 3,
+        title: "Blind Build 2.0",
+        category: "preevents",
+        description: "A fun-filled technical event where students build logic gates under a blindfold challenge, testing teamwork, accuracy, and problem-solving",
+        date: "Oct 15, 2025",
+        venue: "LCD LAB",
+        timings: "2PM",
+        price: "150 per team",
+        imageUrl: "/TechEvents/BLIND BUILD.jpg",
+        registrationUrl: "https://konfhub.com/blind-build-20-944ad8d4"
+    },
     // {
     //     id: 4,
     //     title: "Promptify me!",
@@ -49,7 +49,7 @@ export const preEvents = [
     //     timings: "8:30AM",
     //     price: "150 per team",
     //     imageUrl: "/TechEvents/Promptify Me.jpg",
-    //     registrationUrl: null
+    //     registrationUrl: "https://konfhub.com/promptify-me"
     // },
        
 ];
