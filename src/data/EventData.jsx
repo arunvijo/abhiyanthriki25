@@ -91,10 +91,10 @@ export const allEvents = [
         id: 8,
         title: "Cloud & Careers: Navigating the Tech Landscape",
         category: "technical",
-        description: "A technical session led by industry experts, guiding students through emerging opportunities in cloud technologies and modern tech careers",
+        description: "A technical talk session led by industry experts, guiding students through emerging opportunities in cloud technologies and modern tech careers",
         date: "Oct 15, 2025",
         venue: "MULTIMEDIA HALL",
-        timings: "8.30AM",
+        timings: "9.00AM",
         price: "50 per person",
         imageUrl: "/TechEvents/Cloud & Careers.jpg",
         registrationUrl: "https://konfhub.com/cloud-careers-navigating-the-tech-landscape"
@@ -109,7 +109,7 @@ export const allEvents = [
         timings: "5.30PM",
         price: "249 per person",
         imageUrl: "/TechEvents/Vibe Night.jpg",
-        registrationUrl: "https://konfhub.com/vibe-night-d5152552"
+        registrationUrl: "https://konfhub.com/vibe-night"
     },
 
     // --- Non-Technical Events ---
