@@ -91,7 +91,7 @@ export const preEvents = [
         id: 8,
         title: "Cloud & Careers: Navigating the Tech Landscape",
         category: "preevents",
-        description: "A technical session led by industry experts, guiding students through emerging opportunities in cloud technologies and modern tech careers",
+        description: "A technical talk session led by industry experts, guiding students through emerging opportunities in cloud technologies and modern tech careers",
         date: "Oct 15, 2025",
         venue: "MULTIMEDIA HALL",
         timings: "9.00AM",
