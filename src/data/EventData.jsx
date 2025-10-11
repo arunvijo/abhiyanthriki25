@@ -59,7 +59,7 @@ export const allEvents = [
         date: "Oct 15, 2025",
         venue: "Virtual Instrumentation Lab",
         timings: "8.30AM",
-        price: "150 per team",
+        price: "500 per team",
         imageUrl: "/TechEvents/CIRCUIT.jpg",
         registrationUrl: "https://konfhub.com/circuit-trails-arduino-hackathon-sprint"
     },
