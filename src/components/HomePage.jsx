@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HeroSection from './HeroSection';
+import CountdownTimer from './CountdownTimer';
 import AboutSection from './AboutSection';
 import CollegeSection from './CollegeSection';
 import EventSection from './EventSection';
@@ -13,6 +14,7 @@ const HomePage = () => {
   return (
     <>
       <HeroSection />
+      <CountdownTimer />
       <AboutSection />
       <CollegeSection />
       {/* <SponsorsSection /> */}
