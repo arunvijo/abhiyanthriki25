@@ -8,7 +8,9 @@ import TargetCursor from '/src/components/TargetCursor.jsx';
 //Placeholder image for prevents
 import placeholderImage from "/keyboardwire.png";
 // NEW: Import icons from the Feather Icons library
-import { FiCalendar, FiClock, FiDollarSign, FiMapPin } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
+// ✅ Correct
+import { FaRupeeSign } from "react-icons/fa";
 // --- SVG COMPONENTS ---
 
 const ImageClipPathSVG = () => (
@@ -198,7 +200,7 @@ const EventModal = ({ event, onClose }) => {
               <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
                 <EventDetailItem icon={FiCalendar} text={event.date} isDesktop />
                 <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop />
-                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop />
+                <EventDetailItem icon={FaRupeeSign} text={event.price} isDesktop />
                 <EventDetailItem icon={FiClock} text={event.timings} isDesktop />
               </div>
               
@@ -238,7 +240,7 @@ const EventModal = ({ event, onClose }) => {
                         <div className="grid grid-cols-2 gap-4 text-neutral-300">
                             <EventDetailItem icon={FiCalendar} text={event.date} />
                             <EventDetailItem icon={FiMapPin} text={event.venue} />
-                            <EventDetailItem icon={FiDollarSign} text={event.price} />
+                            <EventDetailItem icon={FaRupeeSign} text={event.price} />
                             <EventDetailItem icon={FiClock} text={event.timings} />
                         </div>
                         {/* Description no longer needs a max-height here */}

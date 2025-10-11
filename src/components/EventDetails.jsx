@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import allEvents from "../data/EventData"; 
 // NEW: Import icons from the Feather Icons library
-import { FiCalendar, FiMapPin, FiDollarSign, FiClock } from 'react-icons/fi';
+import { FiCalendar, FiMapPin, FiClock } from 'react-icons/fi';
+// ✅ Correct
+import { FaRupeeSign } from "react-icons/fa";
 // --- SVG COMPONENTS ---
 
 
@@ -221,7 +223,7 @@ const EventModal = ({ event, onClose, color = "#F64040" }) => {
                             <div className="grid grid-cols-2 gap-x-8 gap-y-5 text-neutral-300">
                                 <EventDetailItem icon={FiCalendar} text={event.date} isDesktop color={color} />
                                 <EventDetailItem icon={FiMapPin} text={event.venue} isDesktop color={color} />
-                                <EventDetailItem icon={FiDollarSign} text={event.price} isDesktop color={color} />
+                                <EventDetailItem icon={FaRupeeSign} text={event.price} isDesktop color={color} />
                                 <EventDetailItem icon={FiClock} text={event.timings} isDesktop color={color} />
                             </div>
                             <p className="text-neutral-300 text-base leading-relaxed max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
@@ -257,7 +259,7 @@ const EventModal = ({ event, onClose, color = "#F64040" }) => {
                         <div className="grid grid-cols-2 gap-4 text-neutral-300">
                             <EventDetailItem icon={FiCalendar} text={event.date} color={color} />
                             <EventDetailItem icon={FiMapPin} text={event.venue} color={color} />
-                            <EventDetailItem icon={FiDollarSign} text={event.price} color={color} />
+                            <EventDetailItem icon={FaRupeeSign} text={event.price} color={color} />
                             <EventDetailItem icon={FiClock} text={event.timings} color={color} />
                         </div>
                         <p className="text-sm leading-normal text-neutral-300">{event.description}</p>
