@@ -132,7 +132,7 @@ export const allEvents = [
         description: "Lets students act as IPL team owners in a fast-paced auction, bidding for players and building dream teams.",
         date: "Oct 15, 2025",
         venue: "Gallery Hall",
-        timings: "9:00AM to 6:00PM",
+        timings: "9:00AM to 12:00PM",
         price: "75 per person",
         imageUrl: "/NonTechEvents/CRICKONOMICS.jpg",
         registrationUrl: "https://konfhub.com/crickonomics"
