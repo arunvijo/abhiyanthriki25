@@ -111,6 +111,18 @@ export const allEvents = [
         imageUrl: "/TechEvents/Vibe Night.jpg",
         registrationUrl: "https://konfhub.com/vibe-night"
     },
+    {
+        id: 10,
+        title: "Scenius 3.0",
+        category: "technical",
+        description: "An exciting multi-round event that blends knowledge, creativity, and teamwork! From testing your general awareness and technical aptitude to exploring BIS standards, solving on-field riddles, and crafting innovative bridge models - this event is designed to challenge your civil engineering skills in every way.",
+        date: "Oct 15, 2025",
+        venue: "Civil Workshop",
+        timings: "9.00PM",
+        price: "Free Entry",
+        imageUrl: "/TechEvents/Scenius 3.0.jpg",
+        registrationUrl: "https://konfhub.com/scenius-30-56e62375"
+    },
 
     // --- Non-Technical Events ---
     {
