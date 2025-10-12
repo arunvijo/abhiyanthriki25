@@ -33,7 +33,7 @@ export const preEvents = [
         category: "preevents",
         description: "Spreads awareness about women’s health in a creative way, featuring expert talks and a period-pain simulator.",
         date: "Oct 15, 2025",
-        venue: "Seminar Hall (KE BLOCK 4th Floor)",
+        venue: "Sycamore Lab",
         timings: "10:00AM to 12:00PM",
         price: "Free Entry",
         imageUrl: "/NonTechEvents/Red Code.jpg",
