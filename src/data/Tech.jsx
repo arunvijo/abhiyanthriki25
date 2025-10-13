@@ -21,8 +21,8 @@ export const preEvents = [
         category: "preevents",
         description: "Roborazz Line Edition is a robotics challenge where teams design and program autonomous robots to race along a black-line track with speed and precision.",
         date: "Oct 15, 2025",
-        venue: "Pareeksha Bhavan-5",
-        timings: "8:30PM",
+        venue: "Lecture Hall, Pareeksha Bhavan",
+        timings: "9:00AM  to 12:00PM",
         price: "FREE ENTRY",
         imageUrl: "/TechEvents/ROBORAZZ.jpg",
         registrationUrl: "https://konfhub.com/roborazz-line-edition-2dc4ecae" 
