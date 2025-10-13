@@ -46,7 +46,7 @@ export const preEvents = [
         description: "Turns the campus into a fun mystery game where players solve clues, complete tasks, and find the ‘imposter’.",
         date: "Oct 15, 2025",
         venue: "All Around Campus",
-        timings: "09:00AM to 04:00PM",
+        timings: "10:00AM to 01:00PM",
         price: "120 per person",
         imageUrl: "/NonTechEvents/Among Us.jpg",
         registrationUrl: "https://konfhub.com/among-us-1951881c"
