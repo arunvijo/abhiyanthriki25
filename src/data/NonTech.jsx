@@ -52,7 +52,7 @@ export const preEvents = [
         registrationUrl: "https://konfhub.com/among-us-1951881c"
     },
   {
-        id: 16,
+        id: 1,
         title: "Lucky Draw",
         category: "preevents",
         description: "As part of Abhiyanthriki 2025, the RSET Student Council, in collaboration with NSS RSET House Challenge  for building a house for the needy, is organizing an exciting Lucky Draw open to all students from every college! For just ₹50, participants can grab a chance to win an amazing Electric Cycle as the grand prize. The lucky winner will be selected through a random draw conducted during the Valedictory Function of the fest.",
