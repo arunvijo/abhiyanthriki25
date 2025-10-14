@@ -128,7 +128,7 @@ export const allEvents = [
     {
         id: 11,
         title: "Lucky Draw",
-        category: "preevents",
+        category: "non-technical",
         description: "As part of Abhiyanthriki 2025, the RSET Student Council, in collaboration with NSS RSET House Challenge  for building a house for the needy, is organizing an exciting Lucky Draw! For just ₹50, participants can grab a chance to win an amazing Electric Cycle as the grand prize. The lucky winner will be selected through a random draw conducted during the Valedictory Function of the fest.",
         date: "Oct 15, 2025",
         venue: "Chavara Hall",
