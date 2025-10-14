@@ -4,21 +4,21 @@ import HeroGraphicMobile from "./HeroGraphic2";
 import HeroGraphicWeb from "./HeroGraphic";
 import HeroAnimation from "./HeroAnimation";
 import Navbar from "./TopNav";
-import CountdownTimer from "./CountdownTimer";
 
 const HeroSection = () => {
-  const [showCountdown, setShowCountdown] = useState(true);
+  const [showPopup, setShowPopup] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowCountdown(false), 3000);
+    const timer = setTimeout(() => setShowPopup(true), 500);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleClose = () => setShowPopup(false);
 
   return (
     <section id="home" className="relative w-screen h-screen overflow-hidden">
       <Navbar />
       <div className="relative w-full h-full flex items-center justify-center">
-
         {/* Background graphics */}
         <motion.div
           className="absolute inset-0 z-0"
@@ -34,44 +34,64 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        {/* Globe (always visible) */}
+        {/* Globe animation */}
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
           <HeroAnimation />
         </div>
 
-        {/* Countdown overlay (just timer) */}
+        {/* Image Popup */}
         <AnimatePresence>
-          {showCountdown && (
+          {showPopup && (
             <motion.div
-              className="absolute inset-0 flex items-center justify-center z-20 
-                         bg-black/30 backdrop-blur-sm" // lighter, less blur
-              initial={{ opacity: 0, scale: 0.3 }}
-              animate={{ opacity: 1, scale: [0.3, 1.1, 1] }}
-              exit={{ opacity: 0, scale: 1.2 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              className="absolute inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [1, 0.9, 1],
-                  textShadow: [
-                    /* Inner red glow for color */
-                    "0 0 7px #F64040", 
-                    
-                    /* Outer white glow for contrast and visibility */
-                    "0 0 10px #fff",
-                    "0 0 25px #fff",
-                    "0 0 45px #F64040" /* A final, wide red glow to tint the white halo */
-                    ],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <CountdownTimer />
-              </motion.div>
+              <div className="relative flex justify-center items-center">
+                {/* Image container */}
+                <div className="cursor-target cursor-none  relative group inline-block">
+                  <a
+                    href="https://konfhub.com/lucky-draw" // replace with your actual link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {/* Image */}
+                    <img
+                      src="/NonTechEvents/LuckyDraw.jpg"
+                      alt="Popup"
+                      className="max-w-[80vw] max-h-[80vh] rounded-lg shadow-xl transition-all duration-500 group-hover:brightness-[50%]"
+                    />
+
+                    {/* REGISTER text overlay (appears only on hover) */}
+                    <span className="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      REGISTER
+                    </span>
+                  </a>
+
+                  {/* Close button (top-right, near image) */}
+                  <button
+                    onClick={handleClose}
+                    className="cursor-target absolute -top-4 -right-4 bg-black/60 p-2 rounded-full text-neutral-300 hover:text-white hover:bg-black transition-colors cursor-none"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -81,3 +101,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
