@@ -65,9 +65,13 @@ const HeroSection = () => {
                     />
 
                     {/* REGISTER text overlay (appears only on hover) */}
-                    <span className="absolute inset-0 flex items-center justify-center text-white text-3xl font-semibold tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      REGISTER
-                    </span>
+                    <span className="absolute inset-0 flex items-center justify-center 
+                    text-white text-3xl font-semibold tracking-wide 
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                    bg-black/60 rounded-lg">
+                  REGISTER
+                </span>
+
                   </a>
 
                   {/* Close button (top-right, near image) */}
