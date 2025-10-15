@@ -13,7 +13,7 @@ export const preEvents = [
         timings: "4:00 PM",
         price: "50 per person",
         imageUrl: "/NonTechEvents/LuckyDraw.jpg",
-        registrationUrl: "https://konfhub.com/lucky-draw"
+        registrationUrl: "https://konfhub.com/lucky-draw-cab04d66"
     },
     {
         id: 12,

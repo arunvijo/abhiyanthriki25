@@ -53,7 +53,7 @@ const HeroSection = () => {
                 {/* Image container */}
                 <div className="cursor-target cursor-none  relative group inline-block">
                   <a
-                    href="https://konfhub.com/lucky-draw" // replace with your actual link
+                    href="https://konfhub.com/lucky-draw-cab04d66" // replace with your actual link
                     target="_blank"
                     rel="noopener noreferrer"
                   >
